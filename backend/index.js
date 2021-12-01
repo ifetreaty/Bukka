@@ -6,12 +6,15 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const port = process.env.PORT || 8080;
 const mongoose = require("mongoose");
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 mongoose.connect("mongodb://localhost:27017/auth",{
@@ -65,8 +68,20 @@ app.post("/Register",(req,res)=>{
     })
 
 
-}) 
+});
 
-app.listen(6969,()=>{
-    console.log("started")
-})
+app.get('/hello', (req, res) => {
+    res.send('Hi!');
+});
+
+app.get('/', (req, res) => {
+    res.send('Wassup!');
+});
+
+// app.listen(6969,()=>{
+    // console.log("started")
+// })   
+
+app.listen(port, () => {
+    console.log('💪 Server running on ➡️ ', `http://localhost:${port}`);
+});
