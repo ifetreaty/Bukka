@@ -27,11 +27,7 @@ const email = value => {
 render() {
   return (
     ...
-      <Form
-        onSubmit={this.handleLogin}
-        ref={c => {this.form = c;}}
-      >
-
+      <Form onSubmit={this.handleLogin} ref={c => {this.form = c;}}>
         ...
         <Input
           type="text"
@@ -47,4 +43,10 @@ render() {
       </Form>
     ...
   );
+};
+
+this.form.validateALl();
+
+if (this.chackBtn.context._errors.length === 0) {
+  console.log("we good over here");
 }
