@@ -1,4 +1,4 @@
-import React, { Components } from "react";
+import React, { Component } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
@@ -59,7 +59,7 @@ export default class Login extends Component {
           window.location.reload();
         },
         error => {
-          const resMessage = 
+          const resMessage =
             (error.response && error.response.data && error.response.data.message) ||
               error.message || error.toString();
 
@@ -88,13 +88,13 @@ export default class Login extends Component {
 
           <div className="form-group">
             <label htmlFor="username">Username</label>
-            <Input type="text" className="form-control" name="username" value={this.state.username} 
+            <Input type="text" className="form-control" name="username" value={this.state.username}
             onChange={this.onChangeUsername} validations={[required]} />
           </div>
 
           <div className="form-group">
             <label htmlFor="password">Password</label>
-            <Input type="text" className="form-control" name="password" value={this.state.password} 
+            <Input type="text" className="form-control" name="password" value={this.state.password}
             onChange={this.onChangePassword} validations={[required]} />
           </div>
 
