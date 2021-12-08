@@ -1,7 +1,8 @@
-import React, { Components } from "react";
+import React, { Component } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
+import { Link } from "react-router-dom";
 
 import AuthService from "../services/auth.service";
 
@@ -59,7 +60,7 @@ export default class Login extends Component {
           window.location.reload();
         },
         error => {
-          const resMessage = 
+          const resMessage =
             (error.response && error.response.data && error.response.data.message) ||
               error.message || error.toString();
 
@@ -78,23 +79,26 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div className="medium">
-        <div className="card card-container">
-          <img src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="profile-img" className="profile-img-card" />
+      <div className="container">
+        <div className="app-wrapper">
+          {/* <img src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="profile-img" className="profile-img-card" /> */}
+          <div>
+            <h2 className="title">My Account</h2>
+          </div>
 
           <Form onSubmit={this.handleLogin} ref={c => {
             this.form = c;
           }}>
-
+          
           <div className="form-group">
             <label htmlFor="username">Username</label>
-            <Input type="text" className="form-control" name="username" value={this.state.username} 
+            <Input type="text" className="form-control" name="username" value={this.state.username}
             onChange={this.onChangeUsername} validations={[required]} />
           </div>
 
-          <div className="form-group">
+          <div className="form-group pass">
             <label htmlFor="password">Password</label>
-            <Input type="text" className="form-control" name="password" value={this.state.password} 
+            <Input type="password" className="form-control" name="password" value={this.state.password}
             onChange={this.onChangePassword} validations={[required]} />
           </div>
 
@@ -105,6 +109,10 @@ export default class Login extends Component {
               )}
               <span>Login</span>
             </button>
+          </div>
+
+          <div>
+            <p className="link-register"><span className="link-style">Don't have an account?</span><Link to="/register">Register</Link></p>
           </div>
 
           {this.state.message && (
