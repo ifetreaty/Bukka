@@ -6,6 +6,7 @@ import Login from "./components/login.component";
 import Register from "./components/register.component";
 import BoardUser from "./components/board-user.component";
 import BoardAdmin from "./components/board-admin.component";
+import AdminHome from "./components/admin-homepage.component";
 import { Routes, Route } from "react-router-dom";
 import {useState} from 'react';
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path="/login" element={<Login setLoginUser={setLoginUser}/>} />
         <Route path="/register" element={<Register/>} />
         <Route path="/admin" element={<BoardAdmin/>} />
+        <Route path="/admin-homepage" element={<AdminHome/>} />
       </Routes>
     </div>
   );
