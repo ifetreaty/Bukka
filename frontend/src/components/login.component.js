@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import AuthService from "../services/auth.service";
 
@@ -16,47 +16,33 @@ const required = value => {
   }
 };
 
-export default class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.handleLogin = this.handleLogin.bind(this);
-    this.onChangeUsername = this.onChangeUsername.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
+const Login = () => {
+  const navigate = useNavigate();
+  const [state, setState] = React.useState({
+    username: "",
+    password: "",
+    loading: false,
+    message: ""
+  });
+  const form = React.useRef();
+  const checkBtn = React.useRef();
 
-    this.state = {
-      username: "",
-      password: "",
-      loading: false,
-      message: ""
-    };
-  }
-
-  onChangeUsername(e) {
-    this.setState({
-      username: e.target.value
-    });
-  }
-
-   onChangePassword(e) {
-    this.setState({
-      password: e.target.value
-    });
-  }
-
-  handleLogin(e) {
+  const handleLogin = (e) => {
     e.preventDefault();
 
-    this.setState({
+    setState({
+      ...state,
       message: "",
       loading: true
     });
 
-    this.form.validateAll();
+    form.current.validateAll();
 
-    if (this.checkBtn.context._errors.length === 0) {
-      AuthService.login(this.state.username, this.state.password).then(
+
+    if (checkBtn.current?.context._errors.length === 0) {
+      AuthService.login(state.username, state.password).then(
         () => {
-          this.props.history.push("/");
+          navigate('/')
           window.location.reload();
         },
         error => {
@@ -64,21 +50,36 @@ export default class Login extends Component {
             (error.response && error.response.data && error.response.data.message) ||
               error.message || error.toString();
 
-          this.setState({
+          setState({
+            ...state,
             loading: false,
             message: resMessage
           });
         }
       );
     } else {
-      this.setState({
+      setState({
+        ...state,
         loading: false
       });
     }
   }
 
-  render() {
-    return (
+  const onChangeUsername = (e) => {
+    setState({
+      ...state,
+      username: e.target.value
+    });
+  }
+
+  const onChangePassword = (e) => {
+    setState({
+      ...state,
+      password: e.target.value
+    });
+  }
+
+  return (
       <div className="container">
         <div className="app-wrapper">
           {/* <img src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="profile-img" className="profile-img-card" /> */}
@@ -86,25 +87,26 @@ export default class Login extends Component {
             <h2 className="title">My Account</h2>
           </div>
 
-          <Form onSubmit={this.handleLogin} ref={c => {
-            this.form = c;
-          }}>
-          
+          <Form
+            onSubmit={handleLogin}
+            ref={form}
+          >
+
           <div className="form-group">
             <label htmlFor="username">Username</label>
-            <Input type="text" className="form-control" name="username" value={this.state.username}
-            onChange={this.onChangeUsername} validations={[required]} />
+            <Input type="text" className="form-control" name="username" value={state.username}
+            onChange={onChangeUsername} validations={[required]} />
           </div>
 
           <div className="form-group pass">
             <label htmlFor="password">Password</label>
-            <Input type="password" className="form-control" name="password" value={this.state.password}
-            onChange={this.onChangePassword} validations={[required]} />
+            <Input type="password" className="form-control" name="password" value={state.password}
+            onChange={onChangePassword} validations={[required]} />
           </div>
 
           <div className="form-group">
-            <button className="btn btn-primary btn-block" disabled={this.state.loading} >
-              {this.state.loading && (
+            <button className="btn btn-primary btn-block" disabled={state.loading} >
+              {state.loading && (
                 <span className="spinner-border spinner-border-small"></span>
               )}
               <span>Login</span>
@@ -115,20 +117,18 @@ export default class Login extends Component {
             <p className="link-register"><span className="link-style">Don't have an account?</span><Link to="/register">Register</Link></p>
           </div>
 
-          {this.state.message && (
+          {state.message && (
             <div className="form-group">
               <div className="alert alert-danger" role="alert">
-                {this.state.message}
+                {state.message}
               </div>
             </div>
           )}
-          <CheckButton style={{ display: "none" }} ref={c => {
-              this.checkBtn = c;
-            }}
-          />
+          <CheckButton style={{ display: "none" }} ref={checkBtn} />
         </Form>
       </div>
     </div>
     );
-  }
 }
+
+export default Login;
