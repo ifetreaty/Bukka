@@ -3,6 +3,7 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
+import { Link } from "react-router-dom";
 
 import AuthService from "../services/auth.service";
 
@@ -145,8 +146,8 @@ export default class Register extends Component {
 
                 <div className="form-group">
                   <label htmlFor="password">Password</label>
-                  <Input type="password" className="form-control" name="password" value={this.state.email}
-                  onChange={this.onChangeEmail} validations={[required, vpassword]} />
+                  <Input type="password" className="form-control" name="password" value={this.state.password}
+                  onChange={this.onChangePassword} validations={[required, vpassword]} />
                 </div>
 
                 <div className="form-group">
@@ -168,6 +169,9 @@ export default class Register extends Component {
                 this.checkBtn = c;
               }}
             />
+            <div>
+            <p className="link-login"><span className="link-style">Click</span><Link to="/login">here </Link>to login</p>
+          </div>
           </Form>
         </div>
       </div>
