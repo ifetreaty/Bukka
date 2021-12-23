@@ -4,7 +4,16 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { Link } from "react-router-dom";
 
+import UserService from "../services/user.service";
 import AuthService from "../services/auth.service";
+
+// function boardAdmin() {
+// 	return (
+// 		<div>
+// 			<p>This is the admin page</p>
+// 		</div>
+// 	)
+// }
 
 const required = value => {
   if (!value) {
@@ -56,7 +65,7 @@ export default class Login extends Component {
     if (this.checkBtn.context._errors.length === 0) {
       AuthService.login(this.state.username, this.state.password).then(
         () => {
-          this.props.history.push("/");
+          this.props.history.push("/profile");
           window.location.reload();
         },
         error => {
@@ -83,7 +92,7 @@ export default class Login extends Component {
         <div className="app-wrapper">
           {/* <img src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="profile-img" className="profile-img-card" /> */}
           <div>
-            <h2 className="title">My Account</h2>
+            <h2 className="title">Admin Login</h2>
           </div>
 
           <Form onSubmit={this.handleLogin} ref={c => {
@@ -111,10 +120,6 @@ export default class Login extends Component {
             </button>
           </div>
 
-          <div>
-            <p className="link-register"><span className="link-style">Don't have an account?</span><Link to="/register">Register</Link></p>
-          </div>
-
           {this.state.message && (
             <div className="form-group">
               <div className="alert alert-danger" role="alert">
@@ -132,3 +137,44 @@ export default class Login extends Component {
     );
   }
 }
+// export default boardAdmin;
+
+// export default class BoardAdmin extends Component {
+//   constructor(props) {
+//     super(props);
+
+//     this.state = {
+//       content: ""
+//     };
+//   }
+
+// 	componentDidMount() {
+//     UserService.getAdminBoard().then(
+//       response => {
+//         this.setState({
+//           content: response.data
+//         });
+//       },
+//       error => {
+//         this.setState({
+//           content:
+//             (error.response &&
+//               error.response.data &&
+//               error.response.data.message) ||
+//             error.message ||
+//             error.toString()
+//         });
+// 			}
+//     );
+//   }
+
+// 	render() {
+//     return (
+//       <div className="container">
+//         <header className="jumbotron">
+//           <h3>{this.state.content}</h3>
+//         </header>
+//       </div>
+//     );
+//   }
+// }
