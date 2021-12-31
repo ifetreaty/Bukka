@@ -38,22 +38,29 @@ const User = require("./app/models/user.model");
 const bcrypt = require("bcryptjs");
 
 const createAdminUser = async () => {
-  const adminRole = await Role.findOne({
-    name: "admin"
-  });
-
-  if (adminRole) {
-    const adminUser = await User.find({
-      roles: adminRole.id
+  try {
+    const adminRole = await Role.findOne({
+      name: "admin"
     });
 
-    if (!adminUser) {
-      await User.create({
-        name: "Admin",
-        email: "admin@bukka.com",
-        password: bcrypt.hashSync('password', 8)
-      }) 
+    console.log({ adminRole })
+    
+    if (adminRole) {
+      const adminUser = await User.find({
+        roles: adminRole.id
+      });
+      console.log({ adminUser })
+
+      if (!adminUser) {
+        await User.create({
+          name: "Admin",
+          email: "admin@bukka.com",
+          password: bcrypt.hashSync('password', 8)
+        })
+      }
     }
+  } catch (error) {
+    console.log(error);
   }
 };
 
