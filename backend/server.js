@@ -43,15 +43,12 @@ const createAdminUser = async () => {
       name: "admin"
     });
 
-    console.log({ adminRole })
-    
     if (adminRole) {
-      const adminUser = await User.find({
+      const adminUsers = await User.find({
         roles: adminRole.id
       });
-      console.log({ adminUser })
 
-      if (!adminUser) {
+      if (adminUsers?.length < 1) {
         await User.create({
           name: "Admin",
           email: "admin@bukka.com",
