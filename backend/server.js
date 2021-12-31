@@ -34,6 +34,7 @@ app.listen(PORT, () => {
 
 const db = require("./app/models");
 const Role = require("./app/models/role.model");
+const User = require("./app/models/user.model");
 
 function initial() {
   Role.estimatedDocumentCount((err, count) => {
@@ -58,6 +59,12 @@ function initial() {
         console.log("added 'admin' to roles collection");
       });
     }
+    
+    db.createUser(
+      {
+        user: ""
+      }
+    )
   });
 }
 
