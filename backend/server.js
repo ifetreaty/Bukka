@@ -35,6 +35,27 @@ app.listen(PORT, () => {
 const db = require("./app/models");
 const Role = require("./app/models/role.model");
 const User = require("./app/models/user.model");
+const bcrypt = require("bcryptjs");
+
+const createAdminUser = async () => {
+  const adminRole = await Role.findOne({
+    name: "admin"
+  });
+
+  if (adminRole) {
+    const adminUser = await User.find({
+      roles: adminRole.id
+    });
+
+    if (!adminUser) {
+      await User.create({
+        name: "Admin",
+        email: "admin@bukka.com",
+        password: bcrypt.hashSync('password', 8)
+      }) 
+    }
+  }
+};
 
 function initial() {
   Role.estimatedDocumentCount((err, count) => {
@@ -59,13 +80,8 @@ function initial() {
         console.log("added 'admin' to roles collection");
       });
     }
-    
-    db.createUser(
-      {
-        user: ""
-      }
-    )
   });
+  createAdminUser();
 }
 
 db.mongoose
@@ -81,8 +97,3 @@ db.mongoose
     console.error("Connection error", err);
     process.exit();
   });
-
-
-
-
-console.log(Role);
