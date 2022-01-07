@@ -51,6 +51,7 @@ const createAdminUser = async () => {
       if (adminUsers?.length < 1) {
         await User.create({
           name: "Admin",
+          username: "admin",
           email: "admin@bukka.com",
           password: bcrypt.hashSync('password', 8)
         })
