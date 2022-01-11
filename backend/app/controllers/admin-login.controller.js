@@ -12,13 +12,13 @@ exports.adminLogin = (req, res) => {
     username: req.body.username
   })
     .populate("roles", "-__v")
-    .exec((err, isAdmin) => {
+    .exec((err, user) => {
       if (err) {
         res.status(500).send({ message: err });
         return;
       }
 
-      if (!isAdmin) {
+      if (role !== "admin") {
         return res.status(403).send({ message: "Forbidden" });
       }
 
