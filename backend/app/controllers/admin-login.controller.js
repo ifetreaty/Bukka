@@ -12,14 +12,10 @@ exports.adminLogin = (req, res) => {
     username: req.body.username
   })
     .populate("roles", "-__v")
-    .exec((err, isAdmin) => {
+    .exec((err, user) => {
       if (err) {
         res.status(500).send({ message: err });
         return;
-      }
-
-      if (!isAdmin) {
-        return res.status(403).send({ message: "Forbidden" });
       }
 
       var passwordIsValid = bcrypt.compareSync(
