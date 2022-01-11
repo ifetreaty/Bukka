@@ -6,7 +6,7 @@ const Role = require("../models/role.model");
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
-exports.signup = (req, res) => {
+exports.register = (req, res) => {
   const user = new User({
     username: req.body.username,
     email: req.body.email,
@@ -62,11 +62,11 @@ exports.signup = (req, res) => {
   });
 };
 
-exports.signin = (req, res) => {
+exports.login = (req, res) => {
   User.findOne({
     username: req.body.username
   })
-    .populate("roles", "-__v")
+    .populate("roles", "-__v") //I understand how populate works, but not what this second value means
     .exec((err, user) => {
       if (err) {
         res.status(500).send({ message: err });
