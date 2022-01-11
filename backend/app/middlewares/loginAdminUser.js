@@ -24,8 +24,8 @@ isAdmin = (req, res, next) => {
             next();
             return;
           }
-          res.status(403).send({ message: "Forbidden" });
         }
+        res.status(403).send({ message: "Forbidden" });
       }
     );
   });
