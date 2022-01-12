@@ -5,7 +5,8 @@ import CheckButton from "react-validation/build/button";
 import { Link, useNavigate } from "react-router-dom";
 
 import UserService from "../services/user.service";
-import AuthService from "../services/auth.service";
+// import AuthService from "../services/auth.service";
+import AuthAdminService from "../services/auth-admin.service";
 
 // function boardAdmin() {
 // 	return (
@@ -49,7 +50,7 @@ const Login = () => {
 
 
     if (checkBtn.current?.context._errors.length === 0) {
-      AuthService.login(state.username, state.password).then(
+      AuthAdminService.login(state.username, state.password).then(
         () => {
           navigate('/admin-homepage')
           window.location.reload();
