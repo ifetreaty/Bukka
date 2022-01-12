@@ -1,6 +1,8 @@
 const authJwt = require("./authJwt");
+const User = require("../models/user.model");
+const Role = require("../models/role.model");
 
-isAdmin = (req, res, next) => {
+const isAdmin = (req, res, next) => {
   User.findOne({
     username: req.body.username
   }).exec((err, user) => {
@@ -31,4 +33,4 @@ isAdmin = (req, res, next) => {
   });
 };
 
-module.exports = loginAdminUser;
+module.exports = { isAdmin };

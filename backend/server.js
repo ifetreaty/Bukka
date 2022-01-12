@@ -26,6 +26,7 @@ app.get("/", (req, res) => {
 
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
+require('./app/routes/admin.routes')(app);
 
 const PORT = 8080;
 app.listen(PORT, () => {
@@ -47,13 +48,15 @@ const createAdminUser = async () => {
       const adminUsers = await User.find({
         roles: adminRole.id
       });
-
       if (adminUsers?.length < 1) {
         await User.create({
           name: "Admin",
           username: "admin",
           email: "admin@bukka.com",
-          password: bcrypt.hashSync('password', 8)
+          password: bcrypt.hashSync('password', 8),
+          roles: [
+            adminRole.id
+          ]
         })
       }
     }
