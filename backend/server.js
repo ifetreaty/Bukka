@@ -10,11 +10,8 @@ const dbConfig = {
 
 const app = express();
 
-var corsOptions = {
-  origin: "http://localhost:8081"
-};
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(bodyParser.json());
 
@@ -34,6 +31,35 @@ app.listen(PORT, () => {
 
 const db = require("./app/models");
 const Role = require("./app/models/role.model");
+const User = require("./app/models/user.model");
+const bcrypt = require("bcryptjs");
+
+const createAdminUser = async () => {
+  try {
+    const adminRole = await Role.findOne({
+      name: "admin"
+    });
+
+    if (adminRole) {
+      const adminUsers = await User.find({
+        roles: adminRole.id
+      });
+      if (adminUsers?.length < 1) {
+        await User.create({
+          name: "Admin",
+          username: "admin",
+          email: "admin@bukka.com",
+          password: bcrypt.hashSync('password', 8),
+          roles: [
+            adminRole.id
+          ]
+        })
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 function initial() {
   Role.estimatedDocumentCount((err, count) => {
@@ -59,6 +85,7 @@ function initial() {
       });
     }
   });
+  createAdminUser();
 }
 
 db.mongoose
@@ -74,8 +101,3 @@ db.mongoose
     console.error("Connection error", err);
     process.exit();
   });
-
-
-
-
-console.log(Role);

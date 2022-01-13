@@ -1,11 +1,20 @@
 import React, { Component } from "react";
+import { Routes, Route } from "react-router-dom";
 
 import SideNav from "./sidenav.component";
+import HomepageBody from "./homepage-body.component";
 
 function AdminHome() {
 	return (
 		<div>
-			<p>This is the Admin homepage</p>
+			<div>
+				<SideNav></SideNav>
+				<HomepageBody></HomepageBody>
+			</div>
+
+			<div>
+			
+			</div>
 		</div>
 	)
 }
