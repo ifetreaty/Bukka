@@ -49,7 +49,7 @@ const Login = () => {
 
 
     if (checkBtn.current?.context._errors.length === 0) {
-      AuthService.login(state.username, state.password).then(
+      AuthService.loginAdmin(state.username, state.password).then(
         () => {
           navigate('/admin-homepage')
           window.location.reload();

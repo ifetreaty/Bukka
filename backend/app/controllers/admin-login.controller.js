@@ -18,6 +18,10 @@ exports.adminLogin = (req, res) => {
         return;
       }
 
+      if (!user) {
+        return res.status(401).json({ message: 'Username or password is invalid'})
+      }
+
       var passwordIsValid = bcrypt.compareSync(
         req.body.password,
         user.password

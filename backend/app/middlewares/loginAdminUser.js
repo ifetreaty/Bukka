@@ -11,6 +11,10 @@ const isAdmin = (req, res, next) => {
       return;
     }
 
+    if (!user) {
+      return res.status(401).json({ message: 'Username or password is invalid'})
+    }
+
     Role.find(
       {
         _id: { $in: user.roles }
