@@ -1,5 +1,6 @@
 const { verifySignUp } = require("../middlewares");
 const controller = require("../controllers/auth.controller");
+const { loginAdminUser } = require("../middlewares");
 
 module.exports = function(app) {
   app.use(function(req, res, next) {
@@ -20,4 +21,6 @@ module.exports = function(app) {
   );
 
   app.post("/api/auth/login", controller.login);
+
+  app.post("/api/auth/admin/login", [loginAdminUser.isAdmin], controller.adminLogin);
 };

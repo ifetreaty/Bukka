@@ -2,12 +2,12 @@ import axios from "axios";
 
 //I don't really understand line 4../api/auth/ why?
 const API_URL = "http://localhost:8080/api/auth/";
-const API_ADMIN_URL = "http://localhost:8080/api/admin/";
+// const API_ADMIN_URL = "http://localhost:8080/api/admin/";
 
 class AuthService {
     loginAdmin(username, password) {
 		return axios
-			.post(API_ADMIN_URL + "login", {
+			.post(API_URL + "admin/login", {
 				username,
 				password
 			})
