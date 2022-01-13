@@ -18,5 +18,3 @@ class UserService {
 }
 
 export default new UserService();
-
-//I don't really understand this file. why does it exist since my app works without it.
