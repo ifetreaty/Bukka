@@ -5,7 +5,7 @@ import CheckButton from "react-validation/build/button";
 import { Link, useNavigate } from "react-router-dom";
 
 import UserService from "../services/user.service";
-// import AuthService from "../services/auth.service";
+import AuthService from "../services/auth.service";
 import AuthAdminService from "../services/auth-admin.service";
 
 // function boardAdmin() {
