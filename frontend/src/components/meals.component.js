@@ -1,9 +1,12 @@
 import React from "react";
+import "../App.css";
+import TotalMeals from "../TotalMeals";
 
 const Meals = (props) => {
   return (
-    <div>
-      <h2>Meals</h2>     
+    <div className="homepage-body">
+      <h2>Meals</h2>
+      <TotalMeals />     
     </div>
   );
 };

@@ -9,6 +9,9 @@ import BoardAdmin from "./components/board-admin.component";
 import AdminHome from "./components/admin-homepage.component";
 import { Routes, Route } from "react-router-dom";
 import {useState} from 'react';
+
+import Meals from "./components/meals.component";
+import Orders from "./components/orders.component";
 function App() {
   const [user,setLoginUser] = useState({
 
@@ -25,8 +28,11 @@ function App() {
         <Route path="/login" element={<Login setLoginUser={setLoginUser}/>} />
         <Route path="/register" element={<Register/>} />
         <Route path="/admin/login" element={<BoardAdmin/>} />
-        <Route path="/admin-homepage" element={<AdminHome/>} />
+        {/* <Route path="/admin-homepage" element={<AdminHome/>} /> */}
+        <Route path="/admin/meals" element={<Meals/>} />
+        <Route path="/admin/orders" element={<Orders/>} />
       </Routes>
+      <AdminHome />
     </div>
   );
 }

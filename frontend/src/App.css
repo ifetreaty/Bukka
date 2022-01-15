@@ -3,6 +3,11 @@
   padding: 0;
 }
 
+body {
+  background: linear-gradient(135deg, #fc575e, #f7b42c);
+  /* text-align: center; */
+}
+
 .container {
   background: linear-gradient(135deg, #fc575e, #f7b42c);
   width: 100%;
@@ -120,5 +125,10 @@ button:active {
   display: flex;
   justify-content: flex-end;
   width: 70%;
-  background: red;
+  margin-left: 20%;
+  /* background: red; */
 }
+
+/* .admin-homepage {
+  background: linear-gradient(135deg, #fc575e, #f7b42c);
+} */
