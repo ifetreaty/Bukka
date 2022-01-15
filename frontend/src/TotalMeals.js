@@ -6,7 +6,7 @@ const TotalMeals = () => {
   return (
     <div className="available-meals">
       {/* {(mealList).map(avmeal => <div><img src="{`${avmeal.image}.jpg`} width="100%"/></div>)} */}
-      <img src="{whiteRice}" />
+      <img src={whiteRice} />
     </div>
   );
 }
