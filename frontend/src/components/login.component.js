@@ -82,7 +82,6 @@ const Login = () => {
   return (
       <div className="container">
         <div className="app-wrapper">
-          {/* <img src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="profile-img" className="profile-img-card" /> */}
           <div>
             <h2 className="title">My Account</h2>
           </div>

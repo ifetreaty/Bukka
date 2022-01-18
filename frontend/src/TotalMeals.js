@@ -1,5 +1,4 @@
 import React from "react";
-// import mealList from "./mealList.json";
 import whiteRice from "./assets/white-rice.jpg";
 import jollofRice from "./assets/jollof-rice.jpg";
 import friedRice from "./assets/fried-rice.jpg";

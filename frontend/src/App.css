@@ -5,7 +5,6 @@
 
 body {
   background: #fff;
-  /* text-align: center; */
 }
 
 .container {
@@ -122,16 +121,11 @@ button:active {
 }
 
 .homepage-body {
-  /* display: flex;
-  justify-content: flex-start; */
   position: absolute;
   margin-top: 6.5%;
   margin-left: 10rem;
   font-family: Arial, Helvetica, sans-serif;
   letter-spacing: .5px;
-  /* width: 70%;
-  margin-left: 20%; */
-  /* background: red; */
 }
 
 #homepage-body-header {
@@ -147,7 +141,6 @@ button:active {
   background: rgb(46, 155, 46);
   border: none;
   border-radius: 5px;
-  /* font-weight: bold; */
   font-size: 1rem;
 }
 
