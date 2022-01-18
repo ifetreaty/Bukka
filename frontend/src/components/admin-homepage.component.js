@@ -20,9 +20,6 @@ const NavBar = () => {
           <NavLink to="/orders" className="nav-link">
             Orders
           </NavLink>
-          {/* <NavLink to="/messages" className="nav-link">
-            Messages
-          </NavLink> */}
           <NavLink to="/logout" className="nav-link">
             Log Out
           </NavLink>
