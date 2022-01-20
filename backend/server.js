@@ -1,6 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const cloudinary = require("cloudinary");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 const dbConfig = {
   HOST: "localhost",
@@ -9,11 +13,6 @@ const dbConfig = {
 };
 
 const app = express();
-
-const upload = require("./multer");
-const cloudinary = require("./cloudinary")
-const fs = require("fs");
-
 
 app.use(cors());
 
@@ -106,27 +105,28 @@ db.mongoose
     process.exit();
   });
 
-app.use("/upload-images", upload.array("image"), async (req, res) => {
-  
-  const uploader = async (path) => await cloudinary.uploads(path, "Images");
+cloudinary.config({ 
+  cloud_name: process.env.CLOUD_NAME, 
+  api_key: process.env.CLOUDINARY_API_KEY, 
+  api_secret: process.env.CLOUDINARY_API_SECRET 
+});
 
-  if (req.method === "POST") {
-    const urls = []
-    const files = req.files;
-    for (const file of files) {
-      const { path } = file;
-      const newPath = await uploader(path)
-      urls.push(newPath)
-      fs.unlinkSync(path)
-    };
+app.post("/image-upload", (req, res) => {
+  const data = {
+    image: req.body.image,
+  }
 
-    res.status(200).json({
-      message: "images uploaded successfully",
-      data: urls
+  cloudinary.uploader.upload(data.image)
+  .then((result) => {
+    res.status(200).send({
+      message: "success",
+      result,
     });
-  } else {
-    res.status(405).json({
-      err: `${req.method} method not allowed`
+  }).catch((error) => {
+    res.status(500).send({
+      message: "failure",
+      error,
     });
-  };
+  });
+
 });

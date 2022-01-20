@@ -1,4 +1,5 @@
 import React from "react";
+import Uploads from "../uploads";
 import "../App.css";
 
 const Meals = (props) => {
