@@ -3,13 +3,14 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const cloudinary = require("cloudinary");
 const dotenv = require("dotenv");
+const multer = require("multer");
 
-dotenv.config();
+require("dotenv").config();
 
 const dbConfig = {
   HOST: "localhost",
   PORT: 27017,
-  DB: "ifetreaty_db"
+  DB: "ifetreaty_db",
 };
 
 const app = express();
@@ -24,8 +25,8 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to Bukka." });
 });
 
-require('./app/routes/auth.routes')(app);
-require('./app/routes/user.routes')(app);
+require("./app/routes/auth.routes")(app);
+require("./app/routes/user.routes")(app);
 
 const PORT = 8080;
 app.listen(PORT, () => {
@@ -40,23 +41,21 @@ const bcrypt = require("bcryptjs");
 const createAdminUser = async () => {
   try {
     const adminRole = await Role.findOne({
-      name: "admin"
+      name: "admin",
     });
 
     if (adminRole) {
       const adminUsers = await User.find({
-        roles: adminRole.id
+        roles: adminRole.id,
       });
       if (adminUsers?.length < 1) {
         await User.create({
           name: "Admin",
           username: "admin",
           email: "admin@bukka.com",
-          password: bcrypt.hashSync('password', 8),
-          roles: [
-            adminRole.id
-          ]
-        })
+          password: bcrypt.hashSync("password", 8),
+          roles: [adminRole.id],
+        });
       }
     }
   } catch (error) {
@@ -68,8 +67,8 @@ function initial() {
   Role.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {
       new Role({
-        name: "user"
-      }).save(err => {
+        name: "user",
+      }).save((err) => {
         if (err) {
           console.log("error", err);
         }
@@ -78,8 +77,8 @@ function initial() {
       });
 
       new Role({
-        name: "admin"
-      }).save(err => {
+        name: "admin",
+      }).save((err) => {
         if (err) {
           console.log("error", err);
         }
@@ -94,39 +93,26 @@ function initial() {
 db.mongoose
   .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   })
   .then(() => {
     console.log("Successfully connect to MongoDB.");
     initial();
   })
-  .catch(err => {
+  .catch((err) => {
     console.error("Connection error", err);
     process.exit();
   });
 
-cloudinary.config({ 
-  cloud_name: process.env.CLOUD_NAME, 
-  api_key: process.env.CLOUDINARY_API_KEY, 
-  api_secret: process.env.CLOUDINARY_API_SECRET 
-});
+app.use(express.static(__dirname + "/public"));
 
-app.post("/image-upload", (req, res) => {
-  const data = {
-    image: req.body.image,
-  }
+app.use("/api", require("./app/routes/meal.routes"));
 
-  cloudinary.uploader.upload(data.image)
-  .then((result) => {
-    res.status(200).send({
-      message: "success",
-      result,
-    });
-  }).catch((error) => {
-    res.status(500).send({
-      message: "failure",
-      error,
-    });
-  });
+app.use("/api", require("./app/routes/file-upload.routes"));
 
-});
+// allow access to the API from different domains/origins
+app.use(
+  cors({
+    origin: ["http://localhost:8081"],
+  })
+);
