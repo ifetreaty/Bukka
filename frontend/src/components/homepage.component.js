@@ -1,14 +1,29 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-function Home() {
+import "../App.css";
+
+const Home = () => {
   return (
-     <div className="homepage-background">
-      <p>This is where the meals will sit</p>
-          <button><Link to="/register" style={{ "text-decoration": "none"}}>Register</Link></button>
-            <button><Link to="/login" style={{ "text-decoration": "none"}}>Login</Link></button>
+    <>
+      <nav>
+        <div className="NavMenu">
+          <NavLink to="/today-menu" className="nav-link">
+            Menu
+          </NavLink>
+          <NavLink to="/my-orders" className="nav-link">
+            My Orders
+          </NavLink>
+          <NavLink to="/login" className="nav-link">
+            Sign In
+          </NavLink>
+          <NavLink to="/register" className="nav-link">
+            Sign Up
+          </NavLink>
         </div>
-    )
-}
+      </nav>
+    </>
+  );
+};
 
 export default Home;

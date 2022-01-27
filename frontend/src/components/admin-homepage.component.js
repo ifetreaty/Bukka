@@ -1,22 +1,32 @@
 import React, { Component } from "react";
 import { Routes, Route } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import "../App.css";
 
-import SideNav from "./sidenav.component";
-import HomepageBody from "./homepage-body.component";
+import Meals from "./meals.component";
+import Orders from "./orders.component";
 
-function AdminHome() {
-	return (
-		<div>
-			<div>
-				<SideNav></SideNav>
-				<HomepageBody></HomepageBody>
-			</div>
+const NavBar = () => {
+  return (
+    <>
+      <nav>
+        <div className="NavMenu">
+          <NavLink to="/admin/meals" className="nav-link">
+            Meals
+          </NavLink>
+          <NavLink to="/admin/menu" className="nav-link">
+            Menu
+          </NavLink>
+          <NavLink to="/admin/orders" className="nav-link">
+            Orders
+          </NavLink>
+          <NavLink to="/admin/logout" className="nav-link">
+            Log Out
+          </NavLink>
+        </div>
+      </nav>
+    </>
+  );
+};
 
-			<div>
-			
-			</div>
-		</div>
-	)
-}
-
-export default AdminHome;
+export default NavBar;
