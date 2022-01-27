@@ -35,8 +35,6 @@ function MealForm() {
 
     const res = await mealService.handleUpload(formData);
 
-    // console.log(result);
-
     await mealService.saveNewMeal({
       name,
       description,
@@ -109,7 +107,7 @@ function MealForm() {
             type="submit"
             disabled={submitting}
           >
-            Add Meal
+            {submitting ? "please wait..." : "Add Meal"}
           </button>
         </form>
       </div>

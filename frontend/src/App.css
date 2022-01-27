@@ -234,4 +234,5 @@ nav {
 
 .meal-btn:disabled {
   background: grey;
+  font-size: 12px;
 }
