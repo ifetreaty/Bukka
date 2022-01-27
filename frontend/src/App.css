@@ -231,3 +231,7 @@ nav {
 #file-upload {
   visibility: hidden;
 }
+
+.meal-btn:disabled {
+  background: grey;
+}

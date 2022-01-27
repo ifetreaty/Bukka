@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import Form from "react-validation/build/form";
 import mealService from "../services/meal.service";
 import "../App.css";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const required = (value) => {
   if (!value) {
@@ -19,15 +22,33 @@ function MealForm() {
   const [description, setDescription] = useState("");
   const imageRef = useRef();
   const [price, setPrice] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    setSubmitting(true);
+
     const formData = new FormData();
     formData.append("file", imageRef.current.files[0]);
 
-    await mealService.handleUpload(formData);
+    const res = await mealService.handleUpload(formData);
 
-    return mealService.saveNewMeal();
+    // console.log(result);
+
+    await mealService.saveNewMeal({
+      name,
+      description,
+      price,
+      image: res.result.secure_url,
+    });
+    await setSubmitting(false);
+    const notify = () => toast("Meal is successfully created");
+    await notify;
+
+    navigate("/admin/meals");
+    window.location.reload();
   }
 
   return (
@@ -37,7 +58,11 @@ function MealForm() {
           <h2 className="title">New Meal</h2>
         </div>
 
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={handleSubmit}
+          action="http://localhost:8081/admin/meals"
+          method="GET"
+        >
           <div className="form-group">
             <label htmlFor="name">Name</label>
             <input
@@ -79,7 +104,11 @@ function MealForm() {
               validations={[required]}
             />
           </div>
-          <button className="btn btn-primary btn-block meal-btn" type="submit">
+          <button
+            className="btn btn-primary btn-block meal-btn"
+            type="submit"
+            disabled={submitting}
+          >
             Add Meal
           </button>
         </form>

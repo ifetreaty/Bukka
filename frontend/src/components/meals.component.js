@@ -162,9 +162,6 @@ const AddMeal = (props) => {
           <button id="homepage-body-button">Add New Meal</button>
         </Link>
       </div>
-      <div>
-        <img src="file.secure_url" />
-      </div>
     </div>
   );
 };
