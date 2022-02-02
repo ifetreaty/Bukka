@@ -146,8 +146,8 @@ button:active {
 }
 
 .homepage-body {
-  position: absolute;
-  margin-top: 6.5%;
+  position: relative;
+  margin-top: 10%;
   margin-left: 10rem;
   font-family: Arial, Helvetica, sans-serif;
   letter-spacing: 0.5px;
@@ -195,6 +195,10 @@ nav {
   flex-direction: row;
   justify-content: flex-end;
   background: linear-gradient(135deg, #fc575e, #f7b42c);
+  position: fixed;
+  overflow: hidden;
+  top: 0;
+  width: 100%;
 }
 
 .NavMenu {
@@ -235,4 +239,104 @@ nav {
 .meal-btn:disabled {
   background: grey;
   font-size: 12px;
+}
+
+/* meal-card-component-style */
+.meal-list-title {
+  margin-top: 15%;
+  margin-left: 45%;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 4%;
+  max-width: 100%;
+}
+
+.meal-card {
+  position: relative;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  max-width: 15rem;
+  background: #FAF0F0;
+  border: none;
+  border-radius: 8px;
+}
+
+.meal-card-image {
+  width: 15rem;
+  height: 11rem;
+}
+
+.meal-card-body {
+  padding-top: 1.5rem;
+  padding-bottom: 1rem;
+  max-width: 15rem;
+  text-align: center;
+}
+
+.meal-card-name {
+  font-size: 1.5rem;
+  text-align: center;
+  height: 2rem;
+}
+
+.meal-card-description {
+  padding-top: 1rem;
+  height: 3.5rem;
+}
+
+.price {
+  list-style-type: none;
+  font-weight: bold;
+  font-size: 1.3rem;
+  text-align: center;
+  max-width: 15rem;
+  padding-top: 1.5rem;
+}
+
+.meal-card-button {
+  padding: .8rem;
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  background-color: rgb(185, 82, 42);
+  text-align: center;
+  transition: all 0.5s;
+}
+
+.meal-card-button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.meal-card-button span::after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.meal-card-button:hover span {
+  padding-right: .9rem;
+}
+
+.meal-card-button:hover span::after {
+  opacity: 1;
+  right: 0;
+}
+
+.meal-card-link {
+  text-decoration: none;
+  color: #fff;
 }

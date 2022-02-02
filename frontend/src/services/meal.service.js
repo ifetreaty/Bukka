@@ -28,4 +28,8 @@ export default {
       .then((res) => res.data)
       .catch(errorHandler);
   },
+
+  getMeals() {
+    return mealService.get("/meals");
+  },
 };
