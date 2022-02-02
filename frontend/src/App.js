@@ -13,6 +13,7 @@ import { useState } from "react";
 import AddMeal from "./components/meals.component";
 import Orders from "./components/orders.component";
 import MealForm from "./pages/meal-form";
+import TotalMeals from "./components/TotalMeals.component";
 function App() {
   const [user, setLoginUser] = useState({});
 
@@ -22,10 +23,12 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/login" element={<Login setLoginUser={setLoginUser} />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/admin" element={<AdminHome />} />
         <Route path="/admin/login" element={<BoardAdmin />} />
         <Route path="/admin/meals" element={<AddMeal />} />
         <Route path="/admin/orders" element={<Orders />} />
         <Route path="/admin/meals/meal-form" element={<MealForm />} />
+        <Route path="/total" element={<TotalMeals />} />
       </Routes>
       <AdminHome />
     </div>

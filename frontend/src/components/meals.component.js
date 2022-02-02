@@ -4,6 +4,9 @@ import "../App.css";
 import mealService from "../services/meal.service";
 import { useState } from "react";
 import MealForm from "../pages/meal-form";
+import TotalMeals from "./TotalMeals.component";
+
+import axios from "axios";
 
 const AddMeal = (props) => {
   return (
@@ -13,6 +16,9 @@ const AddMeal = (props) => {
         <Link to="/admin/meals/meal-form">
           <button id="homepage-body-button">Add New Meal</button>
         </Link>
+      </div>
+      <div className="total-meals-style">
+        <TotalMeals />
       </div>
     </div>
   );
