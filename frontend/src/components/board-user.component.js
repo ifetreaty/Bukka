@@ -7,31 +7,31 @@ export default class BoardUser extends Component {
     super(props);
 
     this.state = {
-      content: ""
+      content: "",
     };
   }
 
-	componentDidMount() {
+  componentDidMount() {
     UserService.getUserBoard().then(
-      response => {
+      (response) => {
         this.setState({
-          content: response.data
+          content: response.data,
         });
       },
-      error => {
+      (error) => {
         this.setState({
           content:
             (error.response &&
               error.response.data &&
               error.response.data.message) ||
             error.message ||
-            error.toString()
+            error.toString(),
         });
       }
     );
   }
 
-	render() {
+  render() {
     return (
       <div className="container">
         <header className="jumbotron">

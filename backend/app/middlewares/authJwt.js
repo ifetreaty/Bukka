@@ -29,7 +29,7 @@ isAdmin = (req, res, next) => {
 
     Role.find(
       {
-        _id: { $in: user.roles }
+        _id: { $in: user.roles },
       },
       (err, roles) => {
         if (err) {
@@ -53,6 +53,6 @@ isAdmin = (req, res, next) => {
 
 const authJwt = {
   verifyToken,
-  isAdmin
+  isAdmin,
 };
 module.exports = authJwt;

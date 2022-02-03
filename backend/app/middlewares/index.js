@@ -5,5 +5,5 @@ const loginAdminUser = require("./loginAdminUser");
 module.exports = {
   authJwt,
   verifySignUp,
-  loginAdminUser
+  loginAdminUser,
 };

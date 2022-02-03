@@ -1,14 +1,27 @@
-import React from "react";
-import Uploads from "../uploads";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "../App.css";
+import mealService from "../services/meal.service";
+import { useState } from "react";
+import MealForm from "../pages/meal-form";
+import TotalMeals from "./TotalMeals.component";
 
-const Meals = (props) => {
+import axios from "axios";
+
+const AddMeal = (props) => {
   return (
-    <div className="homepage-body">
-      <h2 id="homepage-body-header">Manage Meals</h2>
-      <button id="homepage-body-button">Add New Meal</button>
+    <div>
+      <div className="homepage-body">
+        <h2 id="homepage-body-header">Manage Meals</h2>
+        <Link to="/admin/meals/meal-form">
+          <button id="homepage-body-button">Add New Meal</button>
+        </Link>
+      </div>
+      <div className="total-meals-style">
+        <TotalMeals />
+      </div>
     </div>
   );
 };
 
-export default Meals;
+export default AddMeal;

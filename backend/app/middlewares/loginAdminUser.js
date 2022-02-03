@@ -4,7 +4,7 @@ const Role = require("../models/role.model");
 
 const isAdmin = (req, res, next) => {
   User.findOne({
-    username: req.body.username
+    username: req.body.username,
   }).exec((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
@@ -12,12 +12,14 @@ const isAdmin = (req, res, next) => {
     }
 
     if (!user) {
-      return res.status(401).json({ message: 'Username or password is invalid'})
+      return res
+        .status(401)
+        .json({ message: "Username or password is invalid" });
     }
 
     Role.find(
       {
-        _id: { $in: user.roles }
+        _id: { $in: user.roles },
       },
       (err, roles) => {
         if (err) {

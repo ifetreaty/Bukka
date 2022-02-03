@@ -1,3 +1,3 @@
 module.exports = {
-  secret: "ifetreaty-secret-key"
+  secret: "ifetreaty-secret-key",
 };
