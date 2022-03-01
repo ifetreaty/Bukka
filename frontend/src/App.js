@@ -12,8 +12,9 @@ import { useState } from "react";
 
 import AddMeal from "./components/meals.component";
 import Orders from "./components/orders.component";
-import MealForm from "./pages/meal-form";
+import MealForm from "./pages/meal-create-form";
 import TotalMeals from "./components/TotalMeals.component";
+import EditForm from "./pages/meal-edit-form";
 function App() {
   const [user, setLoginUser] = useState({});
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/admin/meals" element={<AddMeal />} />
         <Route path="/admin/orders" element={<Orders />} />
         <Route path="/admin/meals/meal-form" element={<MealForm />} />
+        <Route path="/admin/meals/edit/:id" element={<EditForm />} />
         <Route path="/total" element={<TotalMeals />} />
       </Routes>
       <AdminHome />
