@@ -56,11 +56,7 @@ function MealForm() {
           <h2 className="title">New Meal</h2>
         </div>
 
-        <form
-          onSubmit={handleSubmit}
-          action="http://localhost:8081/admin/meals"
-          method="GET"
-        >
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="name">Name</label>
             <input

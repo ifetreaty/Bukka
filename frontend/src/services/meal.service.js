@@ -32,4 +32,26 @@ export default {
   getMeals() {
     return mealService.get("/meals");
   },
+
+  getMeal(id) {
+    return mealService
+      .get(`/meals/${id}`)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  editMeal(meal, id) {
+    console.log(meal);
+    return mealService
+      .put(`/meals/${id}`, meal)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  deleteMeal(id) {
+    return mealService
+      .delete(`/meals/${id}`)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
 };

@@ -8,6 +8,7 @@ const mealSchema = new Schema(
     image: { type: String, required: true },
     price: { type: String, required: true }, //make the type "number" here?
     // cloudinary_id: { type: String, required: true }
+    // _id: { type: String },
   },
   {
     timestamps: true,

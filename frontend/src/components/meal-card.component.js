@@ -1,5 +1,9 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "../App.css";
+import EditButton from "./edit.component";
+import Modal from "./select-meal-modal.component";
+import SelectMeal from "./select-meal.component";
 
 const MealCard = ({ image, name, description, price }) => {
   return (
@@ -13,15 +17,16 @@ const MealCard = ({ image, name, description, price }) => {
       </div>
       <div>
         <ul className="list-group">
-          <li className="list-group-item price">Price: {price}</li>
+          <li className="list-group-item price">
+            Price: N
+            {new Intl.NumberFormat("en-IN", {
+              maximumSignificantDigits: 5,
+            }).format(price)}
+          </li>
         </ul>
       </div>
       <div className="meal-card-body">
-        <button className="meal-card-button">
-          <a href="#" className="meal-card-link">
-            <span>Select Meal</span>
-          </a>
-        </button>
+        <SelectMeal />
       </div>
     </>
   );
