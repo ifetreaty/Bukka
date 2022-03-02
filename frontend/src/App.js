@@ -11,6 +11,7 @@ import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
 import AddMeal from "./components/meals.component";
+import AdminMenu from "./components/admin-menu.component";
 import Orders from "./components/orders.component";
 import MealForm from "./pages/meal-create-form";
 import TotalMeals from "./components/TotalMeals.component";
@@ -27,6 +28,7 @@ function App() {
         <Route path="/admin" element={<AdminHome />} />
         <Route path="/admin/login" element={<BoardAdmin />} />
         <Route path="/admin/meals" element={<AddMeal />} />
+        <Route path="/admin/menu" element={<AdminMenu />} />
         <Route path="/admin/orders" element={<Orders />} />
         <Route path="/admin/meals/meal-form" element={<MealForm />} />
         <Route path="/admin/meals/edit/:id" element={<EditForm />} />
