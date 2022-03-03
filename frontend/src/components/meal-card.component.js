@@ -25,9 +25,6 @@ const MealCard = ({ image, name, description, price }) => {
           </li>
         </ul>
       </div>
-      <div className="meal-card-body">
-        <SelectMeal />
-      </div>
     </>
   );
 };

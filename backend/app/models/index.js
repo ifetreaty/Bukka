@@ -12,4 +12,8 @@ db.user = require("./user.model.js");
 
 db.ROLES = ["user", "admin"];
 
+db.menuitem = require("./menu-item.model");
+
+db.CATEGORIES = ["food", "swallow", "snacks", "dessert", "drinks"];
+
 module.exports = db;

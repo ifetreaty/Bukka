@@ -6,6 +6,7 @@ import MealCard from "./meal-card.component";
 import { Link } from "react-router-dom";
 import EditButton from "./edit.component";
 import DeleteButton from "./delete.component";
+import SelectMeal from "./select-meal.component";
 
 export default class TotalMeals extends Component {
   constructor(props) {
@@ -51,6 +52,9 @@ export default class TotalMeals extends Component {
                   description={meal.description}
                   price={meal.price}
                 />
+                <div className="meal-card-body">
+                  <SelectMeal />
+                </div>
                 <div className="meal-card-edit-icon">
                   <Link to={`/admin/meals/edit/${meal._id}`}>
                     <EditButton />

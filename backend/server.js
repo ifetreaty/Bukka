@@ -36,6 +36,8 @@ app.listen(PORT, () => {
 const db = require("./app/models");
 const Role = require("./app/models/role.model");
 const User = require("./app/models/user.model");
+const MenuItem = require("./app/models/menu-item.model");
+const Category = require("./app/models/category.model");
 const bcrypt = require("bcryptjs");
 
 const createAdminUser = async () => {
@@ -88,6 +90,62 @@ function initial() {
     }
   });
   createAdminUser();
+}
+
+function initialCateg() {
+  Category.estimatedDocumentCount((err, count) => {
+    if (!err && count === 0) {
+      new Category({
+        name: "food",
+      }).save((err) => {
+        if(err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'food' to categories collection");
+      });
+
+      new Category({
+        name: "swallow",
+      }).save((err) => {
+        if(err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'swallow' to categories collection");
+      });
+
+      new Category({
+        name: "snacks",
+      }).save((err) => {
+        if(err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'snacks' to categories collection");
+      });
+
+      new Category({
+        name: "dessert",
+      }).save((err) => {
+        if(err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'dessert' to categories collection");
+      });
+
+      new Category({
+        name: "drinks",
+      }).save((err) => {
+        if(err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'drinks' to categories collection");
+      });
+    }
+  });
 }
 
 db.mongoose

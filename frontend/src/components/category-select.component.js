@@ -2,21 +2,23 @@ import React, { useState } from "react";
 
 const CategorySelect = () => {
   const [category, setCategory] = React.useState("Food");
-  const [day, setDay] = React.useState("Sunday");
+  // const [day, setDay] = React.useState("Sunday");
 
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
   };
 
-  const handleDayChange = (e) => {
-    setDay(e.target.value);
-  };
+  // const handleDayChange = (e) => {
+  //   setDay(e.target.value);
+  // };
 
   return (
     <>
-      <div className="dropdown">
+      {/* <div className="dropdown"> */}
         <div className="dropdown-select">
-          <h4 className="dropdown-select-title">Category:</h4>
+          <div>
+            <h4 className="dropdown-select-title">Choose Category:</h4></div>
+          <div>
           <Dropdown
             options={[
               { label: "Food", value: "Food" },
@@ -28,9 +30,10 @@ const CategorySelect = () => {
             value={category}
             onChange={handleCategoryChange}
           />
+          </div>
         </div>
 
-        <div className="dropdown-select">
+        {/* <div className="dropdown-select">
           <h4 className="dropdown-select-title">Day:</h4>
           <Dropdown
             options={[
@@ -45,13 +48,13 @@ const CategorySelect = () => {
             value={day}
             onChange={handleDayChange}
           />
-        </div>
-      </div>
+        </div> */}
+      {/* </div> */}
 
       <p className="dropdown-text">
         You have selected the {category} category!
       </p>
-      <p className="dropdown-text">For the {day} menu!</p>
+      {/* <p className="dropdown-text">For the {day} menu!</p> */}
     </>
   );
 };

@@ -1,5 +1,6 @@
 import { FaRegWindowClose } from "react-icons/fa";
 import React from "react";
+import { Link } from "react-router-dom";
 import "../App.css";
 import CategorySelect from "./category-select.component";
 
@@ -20,9 +21,11 @@ const Modal = ({ setIsOpen }) => {
           </div>
           <div className="modalActions">
             <div className="actionsContainer">
+            <Link to="/admin/menu">
               <button className="addBtn" onClick={() => setIsOpen(false)}>
                 Add to Menu
               </button>
+            </Link>
               <button className="cancelBtn" onClick={() => setIsOpen(false)}>
                 Cancel
               </button>
