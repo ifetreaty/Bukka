@@ -1,10 +1,10 @@
 const db = require("../models");
-const CATEGORIES = db.CATEGORIES;
+const Category = require("../models/category.model");
 const MenuItem = db.menuitem;
 
 checkDuplicateMealName = (req, res, next) => {
   MenuItem.findOne({
-    name: req.body.name,
+    meal: req.body.meal,
   }).exec((err, menuitem) => {
     if (err) {
       res.status(500).send({ message: err });
@@ -20,17 +20,22 @@ checkDuplicateMealName = (req, res, next) => {
   });
 };
 
-checkCategoriesExist = (req, res, next) => {
-  if (req.body.categories) {
-    for (let i = 0; i < req.body.categories.length; i++) {
-      if (!CATEGORIES.includes(req.body.categories[i])) {
-        res.status(400).send({
-          message: `Failed! Category ${req.body.categories[i]} does not exist!`,
-        });
-        return;
-      }
+checkCategoryExists = (req, res, next) => {
+  Category.findOne({
+    category: req.body.category,
+  }).exec((err) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
     }
-  }
+  })
 
   next();
 };
+
+const verifyMenuItem = {
+  checkDuplicateMealName,
+  checkCategoryExists,
+};
+
+module.exports = verifyMenuItem;

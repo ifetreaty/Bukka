@@ -93,58 +93,18 @@ function initial() {
 }
 
 function initialCateg() {
-  Category.estimatedDocumentCount((err, count) => {
-    if (!err && count === 0) {
-      new Category({
-        name: "food",
-      }).save((err) => {
-        if(err) {
-          console.log("error", err);
-        }
+  const categories = ["food", "swallow", "snacks", "dessert", "drinks"];
 
-        console.log("added 'food' to categories collection");
-      });
+  categories.forEach((category) => {
+    new Category({
+      name: category,
+    }).save((err) => {
+      if (err) {
+        console.log("error", err);
+      }
 
-      new Category({
-        name: "swallow",
-      }).save((err) => {
-        if(err) {
-          console.log("error", err);
-        }
-
-        console.log("added 'swallow' to categories collection");
-      });
-
-      new Category({
-        name: "snacks",
-      }).save((err) => {
-        if(err) {
-          console.log("error", err);
-        }
-
-        console.log("added 'snacks' to categories collection");
-      });
-
-      new Category({
-        name: "dessert",
-      }).save((err) => {
-        if(err) {
-          console.log("error", err);
-        }
-
-        console.log("added 'dessert' to categories collection");
-      });
-
-      new Category({
-        name: "drinks",
-      }).save((err) => {
-        if(err) {
-          console.log("error", err);
-        }
-
-        console.log("added 'drinks' to categories collection");
-      });
-    }
+      console.log(`added '${category}' to categories collection`);
+    });
   });
 }
 
@@ -162,11 +122,27 @@ db.mongoose
     process.exit();
   });
 
+// db.mongoose
+//   .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   })
+//   .then(() => {
+//     console.log("Successfully connect to MongoDB.");
+//     initialCateg();
+//   })
+//   .catch((err) => {
+//     console.error("Connection error", err);
+//     process.exit();
+//   });
+
 app.use(express.static(__dirname + "/public"));
 
 app.use("/api", require("./app/routes/meal.routes"));
 
 app.use("/api", require("./app/routes/file-upload.routes"));
+
+// app.use("/api", require("./app/routes/menu.routes"));
 
 // allow access to the API from different domains/origins
 app.use(

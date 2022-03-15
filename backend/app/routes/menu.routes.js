@@ -1,16 +1,19 @@
 const express = require("express");
 const router = express.Router();
-const { verifyMenuItem } = require("../middlewares");
-const controller = require("../controllers/menu-item.controller");
+const { verifyMenuItem } = require("../middlewares/verifyMenuItem");
+const controller = require("../controllers/menu.controller");
 const { addMenuItem } = require("../middlewares");
 
+router.get("/menu/:id", controller.getMenuItem);
+router.get("/menu/items", controller.getMenuItems);
 router.post(
-  "/auth/addmenuitem",
+  "/menu/items",
   [
     verifyMenuItem.checkDuplicateMealName, 
-    verifyMenuItem.checkCategoriesExist,
+    verifyMenuItem.checkCategoryExists,
   ],
   controller.addMenuItem
 );
+router.delete("/menu/:id", controller.deleteMenuItem);
 
 module.exports = router;

@@ -1,0 +1,24 @@
+const config = require("../config/auth.config");
+const Menu = require("../models/menu-item.model");
+const Meal = require("../models/meal.model");
+
+exports.getMenuItems = (req, res, next) => {
+  MenuItem.find()
+    .then((menuItemsFromDB) => res.status(200).json(menuItemsFromDB))
+    .catch((err) => next(err));
+};
+
+exports.addMenuItem = (req, res) => {
+  const menuItem = new MenuItem({
+    meal: req.body.meal,
+    category: req.body.category,
+  });
+
+  menuItem.save((err, item) => {
+    if(err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+    res.json({ message: "Menu item was added successfully!", menuItem: item });
+  })
+};
