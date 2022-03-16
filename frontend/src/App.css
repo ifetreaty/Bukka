@@ -385,38 +385,16 @@ nav {
   color: #fff;
 }
 
-/* .meal-card-edit-icon {
-  position: relative;
-  margin-left: 85%;
-  margin-top: -3.8rem;
-  cursor: pointer;
-  opacity: 0;
-} */
-
-/* .meal-card-edit-icon:hover {
-  opacity: .8;
-} */
-
 .meal-card-delete-icon {
   position: absolute;
   margin-left: 85%;
   margin-top: -1.2rem;
   cursor: pointer;
-  /* opacity: 0; */
 }
 
 .meal-card-delete-icon:hover {
   opacity: 0.8;
 }
-
-/* .meal-card-edit-icon span::after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-} */
 
 /* edit icon style */
 .edit.icon {
@@ -480,10 +458,8 @@ nav {
 .modal-container {
   position: fixed;
   top: 0;
-  /* bottom: 0; */
+
   left: 0;
-  /* right: 0; */
-  /* background-color: rgba($color: #000000, $alpha: 0.35); */
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
@@ -713,7 +689,6 @@ nav {
 }
 
 .dropdown-select {
-  /* margin-right: 3rem; */
   display: flex;
   justify-content: space-around;
 }
@@ -721,7 +696,6 @@ nav {
 .dropdown-select-title {
   margin-bottom: 0.5rem;
   font-weight: 500;
-  /* margin-left: 2rem; */
 }
 
 .dropdown-text {
