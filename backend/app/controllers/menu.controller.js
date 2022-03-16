@@ -1,6 +1,7 @@
 const config = require("../config/auth.config");
-const Menu = require("../models/menu-item.model");
+const MenuItem = require("../models/menu-item.model");
 const Meal = require("../models/meal.model");
+const { menuitem } = require("../models");
 
 exports.getMenuItems = (req, res, next) => {
   MenuItem.find()
@@ -15,10 +16,20 @@ exports.addMenuItem = (req, res) => {
   });
 
   menuItem.save((err, item) => {
-    if(err) {
+    if (err) {
       res.status(500).send({ message: err });
       return;
     }
     res.json({ message: "Menu item was added successfully!", menuItem: item });
-  })
+  });
+};
+
+exports.deleteMenuItem = (req, res) => {
+  MenuItem.findByIdAndRemove(req.params.id, req.body)
+    .then((menuitem) => {
+      res.json(menuitem);
+    })
+    .catch((err) => {
+      res.status(404).send({ message: "Failed", err });
+    });
 };
