@@ -119,19 +119,6 @@ db.mongoose
   .then(() => {
     console.log("Successfully connect to MongoDB.");
     initial();
-  })
-  .catch((err) => {
-    console.error("Connection error", err);
-    process.exit();
-  });
-
-db.mongoose
-  .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log("Successfully connect to MongoDB.");
     initialCateg();
   })
   .catch((err) => {

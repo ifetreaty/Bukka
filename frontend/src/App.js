@@ -10,11 +10,11 @@ import AdminHome from "./components/admin-homepage.component";
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
-import AddMeal from "./components/meals.component";
-import AdminMenu from "./components/admin-menu.component";
+import AddMeal from "./components/MealComponents/meals.component";
+import AdminMenu from "./components/MenuComponents/admin-menu.component";
 import Orders from "./components/orders.component";
 import MealForm from "./pages/meal-create-form";
-import TotalMeals from "./components/TotalMeals.component";
+import TotalMeals from "./components/MealComponents/TotalMeals.component";
 import EditForm from "./pages/meal-edit-form";
 function App() {
   const [user, setLoginUser] = useState({});

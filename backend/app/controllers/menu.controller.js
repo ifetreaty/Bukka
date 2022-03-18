@@ -3,7 +3,7 @@ const MenuItem = require("../models/menu-item.model");
 const Meal = require("../models/meal.model");
 const { menuitem } = require("../models");
 
-exports.getMenuItems = (req, res, next) => {
+exports.getMenuItems = async (req, res, next) => {
   MenuItem.find()
     .then((menuItemsFromDB) => res.status(200).json(menuItemsFromDB))
     .catch((err) => next(err));
@@ -32,4 +32,21 @@ exports.deleteMenuItem = (req, res) => {
     .catch((err) => {
       res.status(404).send({ message: "Failed", err });
     });
+};
+
+exports.getMenuByCategory = async (req, res, next) => {
+  const match = {}
+
+    if(req.query.category_id){
+        match.category_id = req.query.category_id
+    }
+    try {
+        await req.category.populate({
+            path:'menuitems',
+            match
+        }).execPopulate()
+        res.send(req.category.menuitems)
+    } catch (error) {
+        res.status(500).send()
+    }
 };

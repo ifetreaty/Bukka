@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import "../App.css";
 
-import AddMeal from "./meals.component";
+import AddMeal from "./MealComponents/meals.component";
 import Orders from "./orders.component";
 
 const NavBar = () => {

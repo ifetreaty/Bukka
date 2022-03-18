@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "../App.css";
-import Modal from "./select-meal-modal.component";
+import "../../App.css";
+import Modal from "../MenuComponents/select-meal-modal.component";
 
 const SelectMeal = () => {
   const [isOpen, setIsOpen] = useState(false);

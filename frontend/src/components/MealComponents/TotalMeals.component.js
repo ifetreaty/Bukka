@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useState } from "react";
 import axios from "axios";
-import "../App.css";
-import mealService from "../services/meal.service";
+import "../../App.css";
+import mealService from "../../services/meal.service";
 import MealCard from "./meal-card.component";
 import { Link } from "react-router-dom";
 import EditButton from "./edit.component";
