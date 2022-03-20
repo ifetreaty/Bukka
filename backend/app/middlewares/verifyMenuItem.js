@@ -1,3 +1,4 @@
+const { menuitem } = require("../models");
 const db = require("../models");
 const Category = require("../models/category.model");
 const MenuItem = db.menuitem;

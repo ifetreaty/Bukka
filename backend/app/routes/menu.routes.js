@@ -11,6 +11,6 @@ router.post(
   controller.addMenuItem
 );
 router.delete("/menu/items/:id", controller.deleteMenuItem);
-router.get("/menu/items/category/:id", controller.getMenuByCategory);
+router.get("/menu/items/category/:id", controller.getMenuItemsInCategory);
 
 module.exports = router;

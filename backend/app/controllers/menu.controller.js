@@ -34,19 +34,12 @@ exports.deleteMenuItem = (req, res) => {
     });
 };
 
-exports.getMenuByCategory = async (req, res, next) => {
-  const match = {}
-
-    if(req.query.category_id){
-        match.category_id = req.query.category_id
+exports.getMenuItemsInCategory = (req, res, next) => {
+  MenuItem.find({ category: req.params.id }).exec(function (err, menuitems) {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
     }
-    try {
-        await req.category.populate({
-            path:'menuitems',
-            match
-        }).execPopulate()
-        res.send(req.category.menuitems)
-    } catch (error) {
-        res.status(500).send()
-    }
+    res.json({ message: "View menu items in this category!", menuitems });
+  });
 };
