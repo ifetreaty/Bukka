@@ -1,12 +1,33 @@
-const config = require("../config/auth.config");
-const MenuItem = require("../models/menu-item.model");
-const Meal = require("../models/meal.model");
-const { menuitem } = require("../models");
+const db = require("../models");
+const MenuItem = db.menuitem;
 
-exports.getMenuItems = async (req, res, next) => {
-  MenuItem.find()
-    .then((menuItemsFromDB) => res.status(200).json(menuItemsFromDB))
-    .catch((err) => next(err));
+const getPagination = (page, size) => {
+  const limit = size ? +size : 8;
+  const offset = page ? page * limit : 0;
+  return { limit, offset };
+};
+
+exports.getMenuItems = (req, res) => {
+  const { page, size, category } = req.query;
+  var condition = category
+    ? { category: { $regex: new RegExp(category), $options: "i" } }
+    : {};
+  const { limit, offset } = getPagination(page, size);
+  MenuItem.paginate(condition, { offset, limit })
+    .then((data) => {
+      res.send({
+        totalItems: data.totalDocs,
+        menuItems: data.docs,
+        totalPages: data.totalPages,
+        currentPage: data.page - 1,
+      });
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving menu items.",
+      });
+    });
 };
 
 exports.addMenuItem = (req, res) => {

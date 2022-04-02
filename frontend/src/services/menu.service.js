@@ -28,4 +28,13 @@ export default {
       .then((res) => res.data)
       .catch(errorHandler);
   },
+
+  async getMenuItemsByCategory(id) {
+    try {
+      const res = await menuService.get(`/menu/items/category/${id}`);
+      return res.data;
+    } catch (err) {
+      errorHandler(err);  
+    };
+  },
 };
