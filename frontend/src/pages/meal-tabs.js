@@ -54,7 +54,7 @@ const MealTabs = () => {
           <SnackTab />
         </TabContent>
         <TabContent id="dessertTab" activeTab={activeTab}>
-         <DessertTab />
+          <DessertTab />
         </TabContent>
         <TabContent id="drinkTab" activeTab={activeTab}>
           <DrinkTab />

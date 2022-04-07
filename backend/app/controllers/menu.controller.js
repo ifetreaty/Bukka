@@ -56,11 +56,14 @@ exports.deleteMenuItem = (req, res) => {
 };
 
 exports.getMenuItemsInCategory = (req, res, next) => {
-  MenuItem.find({ category: req.params.id }).exec(function (err, menuitems) {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
-    res.json({ message: "View menu items in this category!", menuitems });
-  });
+  MenuItem.find({ category: req.params.id })
+    .populate("meal")
+    .exec(function (err, menuitems) {
+      if (err) {
+        res.status(500).send({ message: err });
+        console.log(err);
+        return;
+      }
+      res.json({ message: "View menu items in this category!", menuitems });
+    });
 };

@@ -1,9 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-// import "../App.css";
-import mealService from "../../services/meal.service";
-import { useState } from "react";
-import MealForm from "../../pages/meal-create-form";
 import TotalMeals from "./TotalMeals.component";
 
 import axios from "axios";

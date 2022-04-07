@@ -1,9 +1,5 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import "../../App.css";
-import EditButton from "./edit.component";
-import Modal from "../MenuComponents/select-meal-modal.component";
-import SelectMeal from "./select-meal.component";
 
 const MealCard = ({ image, name, description, price }) => {
   return (

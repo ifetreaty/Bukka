@@ -1,109 +1,65 @@
-import React, { Component, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect, useMemo } from "react";
 import menuService from "../../services/menu.service";
 import MealCard from "../MealComponents/meal-card.component";
-import SelectMeal from "../MealComponents/select-meal.component";
-import DeleteButton from "../MealComponents/delete.component";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 function FoodTab() {
-  const [foodMenu, setFoodMenu] = useState([]);
-  const params = useParams();
+  const [menuItems, setMenuItems] = useState([]);
+  const [foodCategory, setFoodCategory] = useState();
 
   useEffect(() => {
-    async function fetchData() {
-      const id = params.id.toString();
-      const foodMenu = await menuService.getMenuItemsByCategory(id);
-      setFoodMenu(foodMenu);
-      console.log(foodMenu);
-
-      if (!foodMenu) {
-        window.alert(`Nothing found in ${id} category`);
-
-        return;
-      }
-    }
-    fetchData();
-
-    return;
+    setFoodCategory(fetchMenuItems);
   }, []);
+
+  const fetchMenuItems = () => {
+    const id = "6231da8ecece324534b292da";
+    menuService
+      .getMenuItemsByCategory(id)
+      .then((res) => {
+        console.log(res);
+        setMenuItems(res.menuitems);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  function getFoodCategory() {
+    if (!foodCategory) {
+      return menuItems;
+    }
+    return menuItems.filter((menuItem) => menuItem.category === foodCategory);
+  }
+
+  let foodCategoryList = useMemo(getFoodCategory, [foodCategory, menuItems]);
 
   const removeMeal = (id) => {
     menuService.deleteMenuItem(id).then((res) => {
-      setFoodMenu(foodMenu => foodMenu.filter((meal) => meal._id !== id));
+      setMenuItems((menuItem) => menuItem.filter((meal) => meal._id !== id));
     });
-  }
+  };
 
   return (
     <div className="cards">
-      {foodMenu.map((meal) => (
+      {foodCategoryList.map((menuitem) => (
         <div className="meal-card">
-          {/* <MealCard key={meal._id} /> */}
+          <MealCard
+            key={menuitem._id}
+            image={menuitem.meal.image}
+            name={menuitem.meal.name}
+            description={menuitem.meal.description}
+            price={menuitem.meal.price}
+          />
+          <div
+            className="meal-card-delete-menu"
+            onClick={(e) => removeMeal(menuitem._id, e)}
+          >
+            <FaRegTrashAlt />
+          </div>
         </div>
       ))}
     </div>
-  )
+  );
 }
 
 export default FoodTab;
-
-// export default class FoodTab extends Component {
-//   constructor(props) {
-//     super(props);
-
-//     this.state = {
-//       foodMenu: [],
-//       errorMessage: "",
-//     };
-//   }
-
-//   componentDidMount() {
-//     menuService.getMenuItems().then((res) => {
-//       console.log(res);
-//       this.setState({
-//         foodMenu: res.data,
-//       });
-//     });
-//   }
-
-//   removeItem(id) {
-//     menuService.deleteMenuItem(id).then((res) => {
-//       this.setState({
-//         foodMenu: this.state.foodMenu.filter((menuitem) => menuitem._id !== id),
-//       });
-//     });
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//         <div className="cards">
-//           {
-//             (this.state.foodMenu.
-//             map((menuitem) => {
-//               return (
-//                 <div className="meal-card">
-//                   <MealCard
-//                     key={menuitem._id}
-//                     image={menuitem.image}
-//                     name={menuitem.name}
-//                     description={menuitem.description}
-//                     price={menuitem.price}
-//                   />
-//                   <div className="meal-card-body">
-//                   <SelectMeal />
-//                 </div>
-//                 <div
-//                   className="meal-card-delete-icon"
-//                   onClick={(e) => this.removeItem(menuitem._id, e)}
-//                 >
-//                   <DeleteButton />
-//                 </div>
-//                 </div>
-//               );
-//             }))
-//           }
-//         </div>
-//       </div>
-//     );
-//   }
-// }

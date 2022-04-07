@@ -5,7 +5,7 @@ import "../../App.css";
 const EditButton = ({ id }) => {
   return (
     <>
-      <div className="edit icon"></div>
+      <div className="edit-icon"></div>
     </>
   );
 };

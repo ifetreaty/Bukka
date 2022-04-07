@@ -34,7 +34,7 @@ export default {
       const res = await menuService.get(`/menu/items/category/${id}`);
       return res.data;
     } catch (err) {
-      errorHandler(err);  
-    };
+      errorHandler(err);
+    }
   },
 };

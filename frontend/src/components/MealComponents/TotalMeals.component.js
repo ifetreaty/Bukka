@@ -1,12 +1,11 @@
-import React, { Component, useEffect, useState } from "react";
-
+import React, { useEffect, useState } from "react";
 import "../../App.css";
 import mealService from "../../services/meal.service";
 import MealCard from "./meal-card.component";
 import { Link } from "react-router-dom";
 import EditButton from "./edit.component";
-import DeleteButton from "./delete.component";
 import SelectMeal from "./select-meal.component";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 const TotalMeals = () => {
   const [meals, setMeals] = useState([]);
@@ -20,7 +19,7 @@ const TotalMeals = () => {
       .getMeals()
       .then((res) => {
         console.log(res);
-        setMeals(res.data);
+        setMeals(res.data.meals);
       })
       .catch((err) => {
         console.log(err);
@@ -49,7 +48,7 @@ const TotalMeals = () => {
               price={meal.price}
             />
             <div className="meal-card-body">
-              <SelectMeal />
+              <SelectMeal mealId={meal._id} />
             </div>
             <div className="meal-card-edit-icon">
               <Link to={`/admin/meals/edit/${meal._id}`}>
@@ -57,11 +56,11 @@ const TotalMeals = () => {
               </Link>
             </div>
             <div
-                  className="meal-card-delete-icon"
-                  onClick={(e) => removeMeal(meal._id, e)}
-                >
-                  <DeleteButton />
-                </div>
+              className="meal-card-delete-icon"
+              onClick={(e) => removeMeal(meal._id, e)}
+            >
+              <FaRegTrashAlt />
+            </div>
           </div>
         ))}
       </div>
@@ -70,4 +69,3 @@ const TotalMeals = () => {
 };
 
 export default TotalMeals;
-

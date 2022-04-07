@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 
-const CategorySelect = () => {
-  const [category, setCategory] = React.useState("Food");
+const CategorySelect = ({ onChange }) => {
+  const [category, setCategory] = useState("6231da8ecece324534b292da");
 
   const handleCategoryChange = (e) => {
+    onChange(e);
     setCategory(e.target.value);
   };
 
@@ -16,11 +17,27 @@ const CategorySelect = () => {
         <div>
           <Dropdown
             options={[
-              { label: "Food", value: "Food" },
-              { label: "Swallow", value: "Swallow" },
-              { label: "Snacks", value: "Snacks" },
-              { label: "Dessert", value: "Dessert" },
-              { label: "Drinks", value: "Drinks" },
+              { label: "Food", value: "6231da8ecece324534b292da" },
+              {
+                label: "Swallow",
+
+                value: "6231da8ecece324534b292db",
+              },
+              {
+                label: "Snacks",
+
+                value: "6231da8ecece324534b292dc",
+              },
+              {
+                label: "Dessert",
+
+                value: "6231da8ecece324534b292dd",
+              },
+              {
+                label: "Drinks",
+
+                value: "6231da8ecece324534b292de",
+              },
             ]}
             value={category}
             onChange={handleCategoryChange}
@@ -29,7 +46,7 @@ const CategorySelect = () => {
       </div>
 
       <p className="dropdown-text">
-        You have selected the {category} category!
+        You have selected this category!
       </p>
     </>
   );
