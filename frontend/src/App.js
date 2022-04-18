@@ -16,6 +16,7 @@ import Orders from "./components/orders.component";
 import MealForm from "./pages/meal-create-form";
 import TotalMeals from "./components/MealComponents/TotalMeals.component";
 import EditForm from "./pages/meal-edit-form";
+import MealPagination from "./components/MealComponents/meal-pagination";
 function App() {
   const [user, setLoginUser] = useState({});
 
@@ -33,6 +34,7 @@ function App() {
         <Route path="/admin/meals/meal-form" element={<MealForm />} />
         <Route path="/admin/meals/edit/:id" element={<EditForm />} />
         <Route path="/total" element={<TotalMeals />} />
+        <Route path="/admin/meals/page/:pageNumber" element={<MealPagination />} />
       </Routes>
       <AdminHome />
     </div>

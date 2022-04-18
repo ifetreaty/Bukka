@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import EditButton from "./edit.component";
 import SelectMeal from "./select-meal.component";
 import { FaRegTrashAlt } from "react-icons/fa";
+import MealPagination from "./meal-pagination";
 
 const TotalMeals = () => {
   const [meals, setMeals] = useState([]);
@@ -19,7 +20,7 @@ const TotalMeals = () => {
       .getMeals()
       .then((res) => {
         console.log(res);
-        setMeals(res.data.meals);
+        setMeals(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -63,6 +64,9 @@ const TotalMeals = () => {
             </div>
           </div>
         ))}
+      </div>
+      <div>
+        <MealPagination />
       </div>
     </div>
   );

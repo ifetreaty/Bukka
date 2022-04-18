@@ -29,9 +29,9 @@ export default {
       .catch(errorHandler);
   },
 
-  getMeals() {
-    return mealService.get("/meals");
-  },
+  // getMeals() {
+  //   return mealService.get("/meals");
+  // },
 
   getMeal(id) {
     return mealService
@@ -51,6 +51,13 @@ export default {
   deleteMeal(id) {
     return mealService
       .delete(`/meals/${id}`)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  getMeals(pageNumber) {
+    return mealService
+      .get(`/meals?page=${pageNumber}`)
       .then((res) => res.data)
       .catch(errorHandler);
   },
