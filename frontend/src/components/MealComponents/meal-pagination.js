@@ -23,7 +23,7 @@ const MealPagination = () => {
         const res = await mealService.getMeals(pageNumber);
         console.log(res);
 
-        const { data, pages: totalPages } = await res.json();
+        const { data, pages: totalPages } = res;
 
         setPages(totalPages);
         setMeals(data);
@@ -47,12 +47,12 @@ const MealPagination = () => {
       ) : (
         <>
           <Pagination page={page} pages={pages} changePage={setPage} />
-          <div className="app__meals">
+          {/* <div className="app__meals">
             {meals.map((meal) => (
               <MealCard key={meal._id} meal={meal} />
             ))}
-          </div>
-          <Pagination page={page} pages={pages} changePage={setPage} />
+          </div> */}
+          {/* <Pagination page={page} pages={pages} changePage={setPage} /> */}
         </>
       )}
     </div>

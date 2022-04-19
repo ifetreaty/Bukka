@@ -73,9 +73,12 @@ exports.editMeal = (req, res) => {
   console.log(req.body);
   Meal.findByIdAndUpdate(req.params.id, req.body)
     .then((meal) => {
+      if (!meal) {
+        return res.status(404).json({ message: "Meal not found" });
+      }
       res.json(meal);
     })
     .catch((err) => {
-      res.status(404).send({ message: "Failed", err });
+      res.status(500).send({ message: "Failed", err });
     });
 };

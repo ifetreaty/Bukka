@@ -789,3 +789,45 @@ ul.meal-tab-nav li.active {
 .meal-card-delete-menu:hover {
   opacity: 0.8;
 }
+
+/*Pagination */
+.meal-pagination {
+  max-width: 1400px;
+  margin: 5rem auto;
+}
+
+.app__meals {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.loading-text,
+.error-text {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.error-text {
+  color: red;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding-left: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.pagination button {
+  margin-right: 0.5rem;
+  cursor: pointer;
+  padding: 7px 15px;
+}
+
+.pagination button:disabled {
+  background-color: #333;
+  color: #fff;
+  cursor: not-allowed;
+}
