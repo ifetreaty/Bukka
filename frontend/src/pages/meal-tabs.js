@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import FoodTab from "../AllTabs/food-tab";
-import SwallowTab from "../AllTabs/swallow-tab";
-import TabNavItem from "../tab-nav-item.component";
-import TabContent from "../tab-content.component";
+import FoodTab from "../components/AllTabs/food-tab";
+import SwallowTab from "../components/AllTabs/swallow-tab";
+import SnackTab from "../components/AllTabs/snack-tab";
+import DessertTab from "../components/AllTabs/dessert-tab";
+import DrinkTab from "../components/AllTabs/drinks-tab";
+import TabNavItem from "../components/tab-nav-item.component";
+import TabContent from "../components/tab-content.component";
 
 const MealTabs = () => {
   const [activeTab, setActiveTab] = useState("foodTab");
@@ -22,8 +25,8 @@ const MealTabs = () => {
           setActiveTab={setActiveTab}
         />
         <TabNavItem
-          title="Snacks"
-          id="snacksTab"
+          title="Snack"
+          id="snackTab"
           activeTab={activeTab}
           setActiveTab={setActiveTab}
         />
@@ -34,27 +37,27 @@ const MealTabs = () => {
           setActiveTab={setActiveTab}
         />
         <TabNavItem
-          title="Drinks"
-          id="drinksTab"
+          title="Drink"
+          id="drinkTab"
           activeTab={activeTab}
           setActiveTab={setActiveTab}
         />
       </ul>
       <div className="meal-tab-content">
         <TabContent id="foodTab" activeTab={activeTab}>
-          <p>Food Options sit here!</p>
+          <FoodTab />
         </TabContent>
         <TabContent id="swallowTab" activeTab={activeTab}>
-          <p>Swallow Options sit here!</p>
+          <SwallowTab />
         </TabContent>
-        <TabContent id="snacksTab" activeTab={activeTab}>
-          <p>Snack Options sit here!</p>
+        <TabContent id="snackTab" activeTab={activeTab}>
+          <SnackTab />
         </TabContent>
         <TabContent id="dessertTab" activeTab={activeTab}>
-          <p>Dessert Options sit here!</p>
+          <DessertTab />
         </TabContent>
-        <TabContent id="drinksTab" activeTab={activeTab}>
-          <p>Drink Options sit here!</p>
+        <TabContent id="drinkTab" activeTab={activeTab}>
+          <DrinkTab />
         </TabContent>
       </div>
     </div>

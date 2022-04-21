@@ -36,6 +36,8 @@ app.listen(PORT, () => {
 const db = require("./app/models");
 const Role = require("./app/models/role.model");
 const User = require("./app/models/user.model");
+const MenuItem = require("./app/models/menu-item.model");
+const Category = require("./app/models/category.model");
 const bcrypt = require("bcryptjs");
 
 const createAdminUser = async () => {
@@ -90,14 +92,34 @@ function initial() {
   createAdminUser();
 }
 
+function initialCateg() {
+  Category.estimatedDocumentCount((err, count) => {
+    const categories = ["food", "swallow", "snacks", "dessert", "drinks"];
+    if (!err && count === 0) {
+      categories.forEach((category) => {
+        new Category({
+          name: `${category}`,
+        }).save((err) => {
+          if (err) {
+            console.log("error", err);
+          }
+
+          console.log(`added '${category}' to categories collection`);
+        });
+      });
+    }
+  });
+}
+
 db.mongoose
   .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("Successfully connect to MongoDB.");
+    console.log("Successfully connected to MongoDB.");
     initial();
+    initialCateg();
   })
   .catch((err) => {
     console.error("Connection error", err);
@@ -109,6 +131,8 @@ app.use(express.static(__dirname + "/public"));
 app.use("/api", require("./app/routes/meal.routes"));
 
 app.use("/api", require("./app/routes/file-upload.routes"));
+
+app.use("/api", require("./app/routes/menu.routes"));
 
 // allow access to the API from different domains/origins
 app.use(

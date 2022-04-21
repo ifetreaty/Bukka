@@ -1,5 +1,5 @@
-import "../App.css";
-import MealTabs from "./TabComponent/meal-tabs";
+import "../../App.css";
+import MealTabs from "../../pages/meal-tabs";
 
 function AdminMenu() {
   return (

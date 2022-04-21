@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 import "./App.css";
 import Homepage from "./components/homepage.component";
@@ -10,12 +10,13 @@ import AdminHome from "./components/admin-homepage.component";
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
-import AddMeal from "./components/meals.component";
-import AdminMenu from "./components/admin-menu.component";
+import AddMeal from "./components/MealComponents/meals.component";
+import AdminMenu from "./components/MenuComponents/admin-menu.component";
 import Orders from "./components/orders.component";
 import MealForm from "./pages/meal-create-form";
-import TotalMeals from "./components/TotalMeals.component";
+import TotalMeals from "./components/MealComponents/TotalMeals.component";
 import EditForm from "./pages/meal-edit-form";
+import MealPagination from "./components/MealComponents/meal-pagination";
 function App() {
   const [user, setLoginUser] = useState({});
 
@@ -33,6 +34,7 @@ function App() {
         <Route path="/admin/meals/meal-form" element={<MealForm />} />
         <Route path="/admin/meals/edit/:id" element={<EditForm />} />
         <Route path="/total" element={<TotalMeals />} />
+        <Route path="/admin/meals/page/:pageNumber" element={<TotalMeals />} />
       </Routes>
       <AdminHome />
     </div>

@@ -3,16 +3,16 @@ import menuService from "../../services/menu.service";
 import MealCard from "../MealComponents/meal-card.component";
 import { FaRegTrashAlt } from "react-icons/fa";
 
-function FoodTab() {
+function DrinkTab() {
   const [menuItems, setMenuItems] = useState([]);
-  const [foodCategory, setFoodCategory] = useState();
+  const [drinkCategory, setDrinkCategory] = useState();
 
   useEffect(() => {
-    setFoodCategory(fetchMenuItems);
+    setDrinkCategory(fetchMenuItems);
   }, []);
 
   const fetchMenuItems = () => {
-    const id = "6231da8ecece324534b292da";
+    const id = "6231da8ecece324534b292de";
     menuService
       .getMenuItemsByCategory(id)
       .then((res) => {
@@ -24,24 +24,24 @@ function FoodTab() {
       });
   };
 
-  function getFoodCategory() {
-    if (!foodCategory) {
+  function getDrinkCategory() {
+    if (!drinkCategory) {
       return menuItems;
     }
-    return menuItems.filter((menuItem) => menuItem.category === foodCategory);
+    return menuItems.filter((menuItem) => menuItem.category === drinkCategory);
   }
 
-  let foodCategoryList = useMemo(getFoodCategory, [foodCategory, menuItems]);
+  let drinkCategoryList = useMemo(getDrinkCategory, [drinkCategory, menuItems]);
 
   const removeMeal = (id) => {
     menuService.deleteMenuItem(id).then((res) => {
-      setMenuItems((menuItem) => menuItem?.filter((meal) => meal._id !== id));
+      setMenuItems((menuItem) => menuItem.filter((meal) => meal._id !== id));
     });
   };
 
   return (
     <div className="cards">
-      {foodCategoryList?.map((menuitem) => (
+      {drinkCategoryList.map((menuitem) => (
         <div className="meal-card">
           <MealCard
             key={menuitem._id}
@@ -62,4 +62,4 @@ function FoodTab() {
   );
 }
 
-export default FoodTab;
+export default DrinkTab;
