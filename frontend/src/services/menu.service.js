@@ -32,7 +32,7 @@ export default {
   async getMenuItemsByCategory(id) {
     try {
       const res = await menuService.get(`/menu/items/category/${id}`);
-      return res.data;
+      return res.data.data;
     } catch (err) {
       errorHandler(err);
     }

@@ -2,30 +2,44 @@ import React, { useEffect, useState } from "react";
 import "../../App.css";
 import mealService from "../../services/meal.service";
 import MealCard from "./meal-card.component";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import EditButton from "./edit.component";
 import SelectMeal from "./select-meal.component";
 import { FaRegTrashAlt } from "react-icons/fa";
 import MealPagination from "./meal-pagination";
 
 const TotalMeals = () => {
+  const params = useParams();
+  const pageNumber = params.pageNumber || 1;
+
   const [meals, setMeals] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+
+  const [page, setPage] = useState(pageNumber);
+  const [pages, setPages] = useState(1);
 
   useEffect(() => {
-    fetchMeals();
-  }, []);
-
-  const fetchMeals = () => {
-    mealService
-      .getMeals()
-      .then((res) => {
+    const fetchMeals = async () => {
+      setLoading(true);
+      try {
+        const res = await mealService.getMeals(page);
         console.log(res);
-        setMeals(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+
+        const { data, pages: totalPages } = res;
+
+        setPages(totalPages);
+        setMeals(data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+        setError("Some error occured");
+      }
+    };
+
+    fetchMeals();
+  }, [page]);
 
   const removeMeal = (id) => {
     mealService.deleteMeal(id).then((res) => {
@@ -66,7 +80,13 @@ const TotalMeals = () => {
         ))}
       </div>
       <div>
-        <MealPagination />
+        <MealPagination
+          loading={loading}
+          error={error}
+          page={page}
+          pages={pages}
+          setPage={setPage}
+        />
       </div>
     </div>
   );

@@ -1,33 +1,42 @@
 const db = require("../models");
 const MenuItem = db.menuitem;
 
-const getPagination = (page, size) => {
-  const limit = size ? +size : 8;
-  const offset = page ? page * limit : 0;
-  return { limit, offset };
-};
+exports.getMenuItems = async (req, res) => {
+  try {
+    let query = MenuItem.find();
 
-exports.getMenuItems = (req, res) => {
-  const { page, size, category } = req.query;
-  var condition = category
-    ? { category: { $regex: new RegExp(category), $options: "i" } }
-    : {};
-  const { limit, offset } = getPagination(page, size);
-  MenuItem.paginate(condition, { offset, limit })
-    .then((data) => {
-      res.send({
-        totalItems: data.totalDocs,
-        menuItems: data.docs,
-        totalPages: data.totalPages,
-        currentPage: data.page - 1,
+    const page = parseInt(req.query.page) || 1;
+    const pageSize = parseInt(req.query.limit) || 8;
+    const skip = (page - 1) * pageSize;
+    const total = await MenuItem.countDocuments();
+
+    const pages = Math.ceil(total / pageSize);
+
+    query = query.skip(skip).limit(pageSize);
+
+    if (page > pages) {
+      return res.status(404).json({
+        status: "fail",
+        message: "No page found",
       });
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving menu items.",
-      });
+    }
+
+    const result = await query;
+
+    res.status(200).json({
+      status: "success",
+      count: result.length,
+      page,
+      pages,
+      data: result,
     });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: "error",
+      message: "Some error occurred while retrieving menu items.",
+    });
+  }
 };
 
 exports.addMenuItem = (req, res) => {
@@ -55,15 +64,41 @@ exports.deleteMenuItem = (req, res) => {
     });
 };
 
-exports.getMenuItemsInCategory = (req, res, next) => {
-  MenuItem.find({ category: req.params.id })
-    .populate("meal")
-    .exec(function (err, menuitems) {
-      if (err) {
-        res.status(500).send({ message: err });
-        console.log(err);
-        return;
-      }
-      res.json({ message: "View menu items in this category!", menuitems });
+exports.getMenuItemsInCategory = async (req, res) => {
+  try {
+    let query = MenuItem.find({ category: req.params.id });
+    query = query.populate("meal");
+
+    const page = parseInt(req.query.page) || 1;
+    const pageSize = parseInt(req.query.limit) || 8;
+    const skip = (page - 1) * pageSize;
+    const total = await MenuItem.countDocuments();
+
+    const pages = Math.ceil(total / pageSize);
+
+    query = query.skip(skip).limit(pageSize);
+
+    if (page > pages) {
+      return res.status(404).json({
+        status: "fail",
+        message: "No page found",
+      });
+    }
+
+    const result = await query;
+
+    res.status(200).json({
+      status: "success",
+      count: result.length,
+      page,
+      pages,
+      data: result,
     });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: "error",
+      message: "Some error occurred while retrieving menu items.",
+    });
+  }
 };

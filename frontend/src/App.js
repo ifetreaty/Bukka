@@ -34,7 +34,7 @@ function App() {
         <Route path="/admin/meals/meal-form" element={<MealForm />} />
         <Route path="/admin/meals/edit/:id" element={<EditForm />} />
         <Route path="/total" element={<TotalMeals />} />
-        <Route path="/admin/meals/page/:pageNumber" element={<AddMeal />} />
+        <Route path="/admin/meals/page/:pageNumber" element={<TotalMeals />} />
       </Routes>
       <AdminHome />
     </div>

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const Pagination = ({ page, pages, changePage }) => {
   let middlePagination;
 
+  console.log(page);
   if (pages <= 5) {
     middlePagination = [...Array(pages)].map((_, idx) => (
       <button

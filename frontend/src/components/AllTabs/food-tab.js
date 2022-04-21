@@ -17,7 +17,7 @@ function FoodTab() {
       .getMenuItemsByCategory(id)
       .then((res) => {
         console.log(res);
-        setMenuItems(res.menuitems);
+        setMenuItems(res);
       })
       .catch((err) => {
         console.log(err);
@@ -35,13 +35,13 @@ function FoodTab() {
 
   const removeMeal = (id) => {
     menuService.deleteMenuItem(id).then((res) => {
-      setMenuItems((menuItem) => menuItem.filter((meal) => meal._id !== id));
+      setMenuItems((menuItem) => menuItem?.filter((meal) => meal._id !== id));
     });
   };
 
   return (
     <div className="cards">
-      {foodCategoryList.map((menuitem) => (
+      {foodCategoryList?.map((menuitem) => (
         <div className="meal-card">
           <MealCard
             key={menuitem._id}

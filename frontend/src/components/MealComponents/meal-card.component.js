@@ -14,7 +14,7 @@ const MealCard = ({ image, name, description, price }) => {
       <div>
         <ul className="list-group">
           <li className="list-group-item price">
-            Price: N
+            Price: &#8358;
             {new Intl.NumberFormat("en-IN", {
               maximumSignificantDigits: 5,
             }).format(price)}

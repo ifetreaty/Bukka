@@ -18,7 +18,7 @@ function SwallowTab() {
       .getMenuItemsByCategory(id)
       .then((res) => {
         console.log(res);
-        setMenuItems(res.menuitems);
+        setMenuItems(res);
       })
       .catch((err) => {
         console.log(err);

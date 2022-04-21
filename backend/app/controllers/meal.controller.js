@@ -2,12 +2,11 @@ const db = require("../models");
 const Meal = db.meal;
 
 exports.getMeals = async (req, res) => {
-  console.log("hello");
   try {
     let query = Meal.find();
 
     const page = parseInt(req.query.page) || 1;
-    const pageSize = parseInt(req.query.limit) || 4;
+    const pageSize = parseInt(req.query.limit) || 8;
     const skip = (page - 1) * pageSize;
     const total = await Meal.countDocuments();
 

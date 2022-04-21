@@ -29,10 +29,6 @@ export default {
       .catch(errorHandler);
   },
 
-  // getMeals() {
-  //   return mealService.get("/meals");
-  // },
-
   getMeal(id) {
     return mealService
       .get(`/meals/${id}`)
