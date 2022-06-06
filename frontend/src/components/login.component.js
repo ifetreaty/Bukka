@@ -1,10 +1,18 @@
-import React, { Component } from "react";
+import React, { Component, useContext, useEffect } from "react";
+import axios from "axios";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import UserContext from "../context/userContext";
+import useUserContext from "../context/useUserContext";
+import NavBar from "./admin-homepage.component";
+// import LandingPage from "./landing-page.component";
+import UserHomePage from "./user-homepage.component";
 
 import AuthService from "../services/auth.service";
+import userService from "../services/user.service";
+import authHeader from "../services/auth-header";
 
 const required = (value) => {
   if (!value) {
@@ -17,7 +25,10 @@ const required = (value) => {
 };
 
 const Login = () => {
+  const { setLoginUser } = useContext(UserContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const [state, setState] = React.useState({
     username: "",
     password: "",
@@ -26,6 +37,8 @@ const Login = () => {
   });
   const form = React.useRef();
   const checkBtn = React.useRef();
+
+  const userRef = React.useRef();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -40,9 +53,12 @@ const Login = () => {
 
     if (checkBtn.current?.context._errors.length === 0) {
       AuthService.login(state.username, state.password).then(
-        () => {
-          navigate("/");
-          window.location.reload();
+        (data) => {
+          // navigate("/");
+          setLoginUser(data);
+          setState("");
+          navigate(from, { replace: true });
+          // window.location.reload();
         },
         (error) => {
           const resMessage =

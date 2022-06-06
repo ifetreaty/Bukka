@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import UserContext from "../context/userContext";
 
 import "../App.css";
 
-const Home = () => {
+const LandingPage = () => {
+  const { user } = useContext(UserContext);
   return (
     <>
       <nav>
@@ -11,19 +13,18 @@ const Home = () => {
           <NavLink to="/today-menu" className="nav-link">
             Menu
           </NavLink>
-          <NavLink to="/my-orders" className="nav-link">
-            My Orders
-          </NavLink>
+
           <NavLink to="/login" className="nav-link">
             Sign In
           </NavLink>
           <NavLink to="/register" className="nav-link">
             Sign Up
           </NavLink>
+          {/* <div>{user}</div> */}
         </div>
       </nav>
     </>
   );
 };
 
-export default Home;
+export default LandingPage;

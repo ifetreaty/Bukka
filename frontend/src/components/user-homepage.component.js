@@ -1,26 +1,28 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import UserContext from "../context/userContext";
+
 import "../App.css";
 
-const NavBar = () => {
+const UserHomePage = () => {
   const { user } = useContext(UserContext);
   return (
     <>
       <nav>
         <div className="NavMenu">
-          <NavLink to="/admin/meals" className="nav-link">
-            Meals
-          </NavLink>
-          <NavLink to="/admin/menu" className="nav-link">
+          <NavLink to="/today-menu" className="nav-link">
             Menu
           </NavLink>
-          <NavLink to="/admin/orders" className="nav-link">
-            Orders
+          <NavLink to="/my-orders" className="nav-link">
+            My Orders
           </NavLink>
-          <NavLink to="/admin/logout" className="nav-link">
+          <NavLink to="#" className="nav-link">
             Log Out
           </NavLink>
+          {/* <NavLink to="/register" className="nav-link">
+            Sign Up
+          </NavLink> */}
+          <h3>Hello {user.name}</h3>
           {/* <div>{user}</div> */}
         </div>
       </nav>
@@ -28,4 +30,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default UserHomePage;

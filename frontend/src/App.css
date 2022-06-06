@@ -831,3 +831,16 @@ ul.meal-tab-nav li.active {
   color: #fff;
   cursor: not-allowed;
 }
+
+.flexGrow {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  
+}
+
+#missing {
+  background: #f7b42c;
+  height: 100%;
+}
