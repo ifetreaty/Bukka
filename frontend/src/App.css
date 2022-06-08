@@ -238,16 +238,18 @@ nav {
   flex-direction: row;
   justify-content: flex-end;
   background: linear-gradient(135deg, #fc575e, #f7b42c);
-  position: fixed;
+  position: sticky;
   overflow: hidden;
   top: 0;
   width: 100%;
+  z-index: 100;
 }
 
 .NavMenu {
   display: flex;
   align-items: center;
   margin-right: 1rem;
+  z-index: 101;
 }
 
 .nav-link {
@@ -842,5 +844,12 @@ ul.meal-tab-nav li.active {
 
 #missing {
   background: #f7b42c;
+  height: 100%;
+}
+
+.unauth-background {
+  background-color: #f7b42c;
+  text-align: center;
+  width: 100%;
   height: 100%;
 }

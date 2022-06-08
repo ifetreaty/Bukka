@@ -44,23 +44,95 @@ function App() {
         <Route path="/unauthorized" element={<Unauthorized />} />
 
         {/* protected routes  */}
-        <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
-          <Route path="/welcome" element={<UserHomePage />} />
-        </Route>
-        <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
-          <Route path="/admin" element={<AdminHome />} />
-          <Route path="/admin/login" element={<BoardAdmin />} />
-          <Route path="/admin/meals" element={<AddMeal />} />
-          <Route path="/admin/menu" element={<AdminMenu />} />
-          <Route path="/admin/orders" element={<Orders />} />
-          <Route path="/admin/meals/meal-form" element={<MealForm />} />
-          <Route path="/admin/meals/edit/:id" element={<EditForm />} />
-          <Route path="/total" element={<TotalMeals />} />
-          <Route
-            path="/admin/meals/page/:pageNumber"
-            element={<TotalMeals />}
-          />
-        </Route>
+        <Route
+          path="/welcome"
+          element={
+            <RequireAuth allowedRoles={[ROLES.User]}>
+              <UserHomePage />
+            </RequireAuth>
+          }
+        ></Route>
+
+        <Route
+          path="/admin"
+          element={
+            <RequireAuth allowedRoles={[ROLES.Admin]}>
+              <AdminHome />
+            </RequireAuth>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/login"
+          element={
+            <RequireAuth allowedRoles={[ROLES.Admin]}>
+              <BoardAdmin />
+            </RequireAuth>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/meals"
+          element={
+            <RequireAuth allowedRoles={[ROLES.Admin]}>
+              <AddMeal />
+            </RequireAuth>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/menu"
+          element={
+            <RequireAuth allowedRoles={[ROLES.Admin]}>
+              <AdminMenu />
+            </RequireAuth>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/orders"
+          element={
+            <RequireAuth allowedRoles={[ROLES.Admin]}>
+              <Orders />
+            </RequireAuth>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/meals/meal-form"
+          element={
+            <RequireAuth allowedRoles={[ROLES.Admin]}>
+              <MealForm />
+            </RequireAuth>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/meals/edit/:id"
+          element={
+            <RequireAuth allowedRoles={[ROLES.Admin]}>
+              <EditForm />
+            </RequireAuth>
+          }
+        ></Route>
+
+        <Route
+          path="/total"
+          element={
+            <RequireAuth allowedRoles={[ROLES.Admin]}>
+              <TotalMeals />
+            </RequireAuth>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/meals/page/:pageNumber"
+          element={
+            <RequireAuth allowedRoles={[ROLES.Admin]}>
+              <TotalMeals />
+            </RequireAuth>
+          }
+        ></Route>
 
         {/* catch all */}
         <Route path="*" element={<Missing />} />

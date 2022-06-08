@@ -6,6 +6,7 @@ import "../App.css";
 
 const UserHomePage = () => {
   const { user } = useContext(UserContext);
+  console.log(user);
   return (
     <>
       <nav>
@@ -19,11 +20,8 @@ const UserHomePage = () => {
           <NavLink to="#" className="nav-link">
             Log Out
           </NavLink>
-          {/* <NavLink to="/register" className="nav-link">
-            Sign Up
-          </NavLink> */}
-          <h3>Hello {user.name}</h3>
-          {/* <div>{user}</div> */}
+
+          <h3>Hello, {user.username}</h3>
         </div>
       </nav>
     </>
