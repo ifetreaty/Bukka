@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import UserContext from "../context/userContext";
 import "../App.css";
 
 const NavBar = () => {
+  const { user } = useContext(UserContext);
   return (
     <>
       <nav>
@@ -19,6 +21,7 @@ const NavBar = () => {
           <NavLink to="/admin/logout" className="nav-link">
             Log Out
           </NavLink>
+          {/* <div>{user}</div> */}
         </div>
       </nav>
     </>

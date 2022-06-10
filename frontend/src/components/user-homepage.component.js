@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import UserContext from "../context/userContext";
 
 import "../App.css";
 
-const Home = () => {
+const UserHomePage = () => {
+  const { user } = useContext(UserContext);
+  console.log(user);
   return (
     <>
       <nav>
@@ -14,16 +17,15 @@ const Home = () => {
           <NavLink to="/my-orders" className="nav-link">
             My Orders
           </NavLink>
-          <NavLink to="/login" className="nav-link">
-            Sign In
+          <NavLink to="#" className="nav-link">
+            Log Out
           </NavLink>
-          <NavLink to="/register" className="nav-link">
-            Sign Up
-          </NavLink>
+
+          <h3>Hello, {user.username}</h3>
         </div>
       </nav>
     </>
   );
 };
 
-export default Home;
+export default UserHomePage;

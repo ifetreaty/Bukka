@@ -1,12 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import TotalMeals from "./TotalMeals.component";
+import NavBar from "../admin-homepage.component";
 
 import axios from "axios";
 
 const AddMeal = (props) => {
   return (
     <div>
+      <NavBar />
       <div className="homepage-body">
         <h2 id="homepage-body-header">Manage Meals</h2>
         <Link to="/admin/meals/meal-form">

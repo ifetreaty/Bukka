@@ -27,4 +27,6 @@ module.exports = function (app) {
     [loginAdminUser.isAdmin],
     controller.adminLogin
   );
+
+  app.get("/api/auth/roles", controller.getRoles);
 };

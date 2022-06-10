@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useMemo } from "react";
 
 import "./App.css";
-import Homepage from "./components/homepage.component";
+import LandingPage from "./components/landing-page.component";
+import UserHomePage from "./components/user-homepage.component";
 import Login from "./components/login.component";
 import Register from "./components/register.component";
 import BoardUser from "./components/board-user.component";
@@ -17,27 +18,126 @@ import MealForm from "./pages/meal-create-form";
 import TotalMeals from "./components/MealComponents/TotalMeals.component";
 import EditForm from "./pages/meal-edit-form";
 import MealPagination from "./components/MealComponents/meal-pagination";
+import { UserProvider } from "./context/UserProvider";
+import Layout from "./components/layout.component";
+import RequireAuth from "./components/require-auth.component";
+import Unauthorized from "./components/unauthorized.component";
+import Missing from "./components/missing.component";
+
+const ROLES = {
+  User: "ROLE_USER",
+  Admin: "ROLE_ADMIN",
+};
+
 function App() {
   const [user, setLoginUser] = useState({});
 
+  const value = useMemo(() => ({ user, setLoginUser }), [user, setLoginUser]);
+
   return (
-    <div className="App">
-      <Routes>
-        <Route path="/" element={<Homepage />} />
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        {/* public routes */}
+        <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login setLoginUser={setLoginUser} />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/admin" element={<AdminHome />} />
-        <Route path="/admin/login" element={<BoardAdmin />} />
-        <Route path="/admin/meals" element={<AddMeal />} />
-        <Route path="/admin/menu" element={<AdminMenu />} />
-        <Route path="/admin/orders" element={<Orders />} />
-        <Route path="/admin/meals/meal-form" element={<MealForm />} />
-        <Route path="/admin/meals/edit/:id" element={<EditForm />} />
-        <Route path="/total" element={<TotalMeals />} />
-        <Route path="/admin/meals/page/:pageNumber" element={<TotalMeals />} />
-      </Routes>
-      <AdminHome />
-    </div>
+        <Route path="/unauthorized" element={<Unauthorized />} />
+
+        {/* protected routes  */}
+        <Route
+          path="/welcome"
+          element={
+            <RequireAuth allowedRoles={[ROLES.User]}>
+              <UserHomePage />
+            </RequireAuth>
+          }
+        ></Route>
+
+        <Route
+          path="/admin"
+          element={
+            <RequireAuth allowedRoles={[ROLES.Admin]}>
+              <AdminHome />
+            </RequireAuth>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/login"
+          element={
+            <RequireAuth allowedRoles={[ROLES.Admin]}>
+              <BoardAdmin />
+            </RequireAuth>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/meals"
+          element={
+            <RequireAuth allowedRoles={[ROLES.Admin]}>
+              <AddMeal />
+            </RequireAuth>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/menu"
+          element={
+            <RequireAuth allowedRoles={[ROLES.Admin]}>
+              <AdminMenu />
+            </RequireAuth>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/orders"
+          element={
+            <RequireAuth allowedRoles={[ROLES.Admin]}>
+              <Orders />
+            </RequireAuth>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/meals/meal-form"
+          element={
+            <RequireAuth allowedRoles={[ROLES.Admin]}>
+              <MealForm />
+            </RequireAuth>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/meals/edit/:id"
+          element={
+            <RequireAuth allowedRoles={[ROLES.Admin]}>
+              <EditForm />
+            </RequireAuth>
+          }
+        ></Route>
+
+        <Route
+          path="/total"
+          element={
+            <RequireAuth allowedRoles={[ROLES.Admin]}>
+              <TotalMeals />
+            </RequireAuth>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/meals/page/:pageNumber"
+          element={
+            <RequireAuth allowedRoles={[ROLES.Admin]}>
+              <TotalMeals />
+            </RequireAuth>
+          }
+        ></Route>
+
+        {/* catch all */}
+        <Route path="*" element={<Missing />} />
+      </Route>
+    </Routes>
   );
 }
 
