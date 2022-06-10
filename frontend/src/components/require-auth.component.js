@@ -5,16 +5,15 @@ const RequireAuth = ({ allowedRoles, children }) => {
   const { user } = useUserContext();
   const location = useLocation();
 
-  console.log(user?.roles?.some((role) => allowedRoles?.includes(role)));
-  return user?.roles?.some((role) => allowedRoles?.includes(role)) ? (
-    children
-  ) : user? (
-    <Navigate to="/unauthorized" state={{ from: location }} replace />
-  ) : (
-    <Navigate to="/login" state={{ from: location }} replace />
-  );
-
-
+  if (user?.roles?.some((role) => allowedRoles?.includes(role))) {
+    return children;
+  } else {
+    if (user) {
+      return <Navigate to="/unauthorized" state={{ from: location }} replace />;
+    } else {
+      return <Navigate to="/login" state={{ from: location }} replace />;
+    }
+  }
 };
 
 export default RequireAuth;

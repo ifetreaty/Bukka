@@ -20,7 +20,6 @@ const LandingPage = () => {
           <NavLink to="/register" className="nav-link">
             Sign Up
           </NavLink>
-          {/* <div>{user}</div> */}
         </div>
       </nav>
     </>

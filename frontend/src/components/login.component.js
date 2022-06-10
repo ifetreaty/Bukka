@@ -7,7 +7,6 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import UserContext from "../context/userContext";
 import useUserContext from "../context/useUserContext";
 import NavBar from "./admin-homepage.component";
-// import LandingPage from "./landing-page.component";
 import UserHomePage from "./user-homepage.component";
 
 import AuthService from "../services/auth.service";
@@ -54,11 +53,9 @@ const Login = () => {
     if (checkBtn.current?.context._errors.length === 0) {
       AuthService.login(state.username, state.password).then(
         (data) => {
-          // navigate("/");
           setLoginUser(data);
           setState("");
           navigate(from, { replace: true });
-          // window.location.reload();
         },
         (error) => {
           const resMessage =
