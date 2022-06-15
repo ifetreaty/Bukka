@@ -8,4 +8,4 @@
       "install-backend": "cd backend && npm install && cd .. ",
       "heroku-postbuild": "npm run install-frontend && npm run install-backend"
   }
-}
+} 
