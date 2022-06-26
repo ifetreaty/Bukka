@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Home from "./LandingPage/landing-page.component";
+import Home from "./landing-page.component";
 
 import UserService from "../services/user.service";
 

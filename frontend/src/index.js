@@ -8,7 +8,7 @@ import { UserProvider } from "../src/context/UserProvider";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter basename="/React">
+    <BrowserRouter>
       <UserProvider>
         <Routes>
           <Route path="/*" element={<App />} />
