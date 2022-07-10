@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 
 import "./App.css";
-import LandingPage from "./components/landing-page.component";
+import LandingPage from "./components/LandingPage/landing-page.component";
 import UserHomePage from "./components/user-homepage.component";
 import Login from "./components/login.component";
 import Register from "./components/register.component";
@@ -13,6 +13,7 @@ import { useState } from "react";
 
 import AddMeal from "./components/MealComponents/meals.component";
 import AdminMenu from "./components/MenuComponents/admin-menu.component";
+import UserMenu from "./components/MenuComponents/user-menu.component";
 import Orders from "./components/orders.component";
 import MealForm from "./pages/meal-create-form";
 import TotalMeals from "./components/MealComponents/TotalMeals.component";
@@ -49,6 +50,15 @@ function App() {
           element={
             <RequireAuth allowedRoles={[ROLES.User]}>
               <UserHomePage />
+            </RequireAuth>
+          }
+        ></Route>
+
+        <Route
+          path="/today-menu"
+          element={
+            <RequireAuth allowedRoles={[ROLES.User]}>
+              <UserMenu />
             </RequireAuth>
           }
         ></Route>
