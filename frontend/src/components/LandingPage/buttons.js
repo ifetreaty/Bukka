@@ -26,6 +26,15 @@ const Button = () => {
       >
         View Menu
       </button>
+
+      {/* <button
+        key={3}
+        className={active === "3" ? "active" : undefined}
+        id={"3"}
+        onClick={handleClick}
+      >
+        Jamal
+      </button> */}
     </Fragment>
   );
 };
