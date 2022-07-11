@@ -274,7 +274,7 @@ nav {
   display: flex;
   text-align: center;
   align-items: center;
-  width: 6.5rem;
+  max-width: 100%;
   height: 2rem;
   padding: 1.5rem;
   border: 2px solid hsl(0, 0%, 85%);
@@ -282,6 +282,37 @@ nav {
   color: #fff;
   border-radius: 10px;
   box-sizing: border-box;
+}
+
+.nav-link-no-land {
+  display: flex;
+  color: hsl(0, 0%, 100%);
+  align-items: center;
+  text-decoration: none;
+  padding: 0 1.5rem;
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.nav-link-no-land:hover {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  max-width: 100%;
+  height: 2rem;
+  padding: 1.5rem;
+  border: 1px solid hsl(0, 0%, 25%);
+  background: hsla(203, 28%, 22%, 1);
+  color: hsl(0, 0%, 90%);
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.user-name-text {
+  color: #fff;
+  margin: 0 .5rem .2rem 1rem;
 }
 
 .background {
@@ -887,11 +918,12 @@ ul.meal-tab-nav li:last-child {
 }
 
 ul.meal-tab-nav li:hover {
-  background: hsl(39, 100%, 90%);
+  background: hsl(20, 75%, 72%);
+  color: #fff;
 }
 
 ul.meal-tab-nav li.active {
-  background: hsl(30, 90%, 70%);
+  background-color: hsl(13, 75%, 52%);
   color: #fff;
   font-weight: bold;
 }
