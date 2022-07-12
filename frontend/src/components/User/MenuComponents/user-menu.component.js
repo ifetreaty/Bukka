@@ -1,5 +1,5 @@
 import "../../App.css";
-import MealTabs from "../../pages/meal-tabs";
+import MealTabs from "../../pages/user-menu-tabs";
 import NavBar from "../admin-homepage.component";
 import UserHomePage from "../user-homepage.component";
 

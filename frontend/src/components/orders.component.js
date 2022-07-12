@@ -1,10 +1,14 @@
 import React from "react";
+import NavBar from "./admin-homepage.component";
 
 const Orders = (props) => {
   return (
-    <div className="homepage-body">
-      <h2>Live Orders</h2>
-    </div>
+    <>
+      <NavBar />
+      <div className="homepage-body">
+        <h2>Live Orders</h2>
+      </div>
+    </>
   );
 };
 
