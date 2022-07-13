@@ -1,5 +1,5 @@
 import "../../App.css";
-import MealTabs from "../../pages/meal-tabs";
+import UserMenuTabs from "../../pages/user-menu-tabs";
 import NavBar from "../admin-homepage.component";
 import UserHomePage from "../user-homepage.component";
 
@@ -8,7 +8,7 @@ function UserMenu() {
     <>
       <UserHomePage />
       <div className="admin-menu">
-        <MealTabs />
+        <UserMenuTabs />
       </div>
     </>
   );
