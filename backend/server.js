@@ -7,12 +7,7 @@ const multer = require("multer");
 
 require("dotenv").config();
 
-const dbConfig = {
-  HOST: "localhost",
-  PORT: 27017,
-  DB: "ifetreaty_db",
-};
-
+const dbConfig = require("./app/config/db.config");
 const app = express();
 
 app.use(cors());
@@ -112,7 +107,7 @@ function initialCateg() {
 }
 
 db.mongoose
-  .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
+  .connect(dbConfig.url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
