@@ -1,29 +1,23 @@
-import axios from "axios";
-
-const menuService = axios.create({
-  baseURL: "http://localhost:8080/api",
-});
+import http from "./http";
 
 const errorHandler = (err) => {
   throw err;
 };
 
 export default {
-  menuService,
-
   saveMenuItem(item) {
-    return menuService
+    return http
       .post("/menu/items", item)
       .then((res) => res.data)
       .catch(errorHandler);
   },
 
   getMenuItems() {
-    return menuService.get("/menu/items");
+    return http.get("/menu/items");
   },
 
   deleteMenuItem(id) {
-    return menuService
+    return http
       .delete(`/menu/items/${id}`)
       .then((res) => res.data)
       .catch(errorHandler);
@@ -31,7 +25,7 @@ export default {
 
   async getMenuItemsByCategory(id) {
     try {
-      const res = await menuService.get(`/menu/items/category/${id}`);
+      const res = await http.get(`/menu/items/category/${id}`);
       return res.data.data;
     } catch (err) {
       errorHandler(err);

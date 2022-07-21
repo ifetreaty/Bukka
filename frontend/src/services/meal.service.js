@@ -1,18 +1,12 @@
-import axios from "axios";
-
-const mealService = axios.create({
-  baseURL: "http://localhost:8080/api",
-});
+import http from "./http";
 
 const errorHandler = (err) => {
   throw err;
 };
 
 export default {
-  mealService,
-
   handleUpload(file) {
-    return mealService
+    return http
       .post("/upload", file, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -23,14 +17,14 @@ export default {
   },
 
   saveNewMeal(newMeal) {
-    return mealService
+    return http
       .post("/meals", newMeal)
       .then((res) => res.data)
       .catch(errorHandler);
   },
 
   getMeal(id) {
-    return mealService
+    return http
       .get(`/meals/${id}`)
       .then((res) => res.data)
       .catch(errorHandler);
@@ -38,21 +32,21 @@ export default {
 
   editMeal(meal, id) {
     console.log(meal);
-    return mealService
+    return http
       .put(`/meals/${id}`, meal)
       .then((res) => res.data)
       .catch(errorHandler);
   },
 
   deleteMeal(id) {
-    return mealService
+    return http
       .delete(`/meals/${id}`)
       .then((res) => res.data)
       .catch(errorHandler);
   },
 
   getMeals(pageNumber) {
-    return mealService
+    return http
       .get(`/meals?page=${pageNumber}`)
       .then((res) => res.data)
       .catch(errorHandler);
