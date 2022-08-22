@@ -52,9 +52,9 @@ const TotalMeals = () => {
       <div>
         <h1 className="meal-list-title">Meal List</h1>
       </div>
-      <div className="cards">
+      <div className="cards total-meals">
         {meals.map((meal) => (
-          <div className="meal-card">
+          <div className="meal-card total-meal-card">
             <MealCard
               key={meal._id}
               image={meal.image}

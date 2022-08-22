@@ -129,6 +129,8 @@ app.use("/api", require("./app/routes/file-upload.routes"));
 
 app.use("/api", require("./app/routes/menu.routes"));
 
+app.use("/api", require("./app/routes/cart.routes"));
+
 // allow access to the API from different domains/origins
 app.use(
   cors({

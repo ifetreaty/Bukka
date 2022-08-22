@@ -7,7 +7,7 @@ const SelectMeal = ({ mealId }) => {
   return (
     <main>
       <button className="meal-card-button" onClick={() => setIsOpen(true)}>
-        <span className="meal-card-link">Select Meal</span>
+        <span className="meal-card-link">Add to Cart</span>
       </button>
       {isOpen && <Modal setIsOpen={setIsOpen} mealId={mealId} />}
     </main>

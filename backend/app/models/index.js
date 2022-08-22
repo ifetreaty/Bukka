@@ -13,11 +13,15 @@ db.url = dbConfig.url;
 
 db.user = require("./user.model.js");
 
+db.role = require("./role.model.js");
+
 db.ROLES = ["user", "admin"];
 
 db.meal = require("./meal.model.js")(mongoose, mongoosePaginate);
 
 db.menuitem = require("./menu-item.model")(mongoose, mongoosePaginate);
+
+db.cart = require("./cart.model");
 
 db.CATEGORIES = ["food", "swallow", "snacks", "dessert", "drinks"];
 
