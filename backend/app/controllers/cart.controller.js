@@ -13,7 +13,7 @@ exports.getCartItems = async (req, res) => {
     }
   } catch (err) {
     console.log(err);
-    res.status(500).send("Your cart is empty!");
+    res.status(500).json({message: "Something went wrong!"});
   }
 };
 
