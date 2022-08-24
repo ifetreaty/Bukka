@@ -3,17 +3,17 @@ const Cart = db.cart;
 const Meal = db.meal;
 
 exports.getCartItems = async (req, res) => {
-  const userId = req.params.id;
+  const userId = req.userId;
   try {
     let cart = await Cart.findOne({ userId });
     if (cart && cart.items.length > 0) {
       res.send(cart);
     } else {
-      res.send(null);
+      res.status(404).json({message: "Cart not found"});
     }
   } catch (err) {
     console.log(err);
-    res.status(500).send("Your cart is empty!");
+    res.status(500).json({message: "Something went wrong!"});
   }
 };
 
@@ -30,10 +30,9 @@ exports.addToCart = async (req, res) => {
     let item = await Meal.findOne({ _id: productId });
     if (!item) {
       console.log(userId);
-      res.status(404).send("Item not found!");
+      res.status(404).json({message: "Meal not found!"});
     }
-    const price = item.price;
-    const name = item.title;
+    const {price, name} = item;
 
     if (cart) {
       let itemIndex = cart.items.findIndex((p) => p.productId == productId);
