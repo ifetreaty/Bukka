@@ -30,7 +30,7 @@ exports.addToCart = async (req, res) => {
     let item = await Meal.findOne({ _id: productId });
     if (!item) {
       console.log(userId);
-      res.status(404).send("Item not found!");
+      res.status(404).json({message: "Meal not found!"});
     }
     const price = item.price;
     const name = item.title;
