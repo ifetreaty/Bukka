@@ -9,7 +9,7 @@ exports.getCartItems = async (req, res) => {
     if (cart && cart.items.length > 0) {
       res.send(cart);
     } else {
-      res.send(null);
+      res.status(404).json({message: "Cart not found"});
     }
   } catch (err) {
     console.log(err);
