@@ -33,7 +33,7 @@ exports.addToCart = async (req, res) => {
       res.status(404).json({message: "Meal not found!"});
     }
     const price = item.price;
-    const name = item.title;
+    const {price, name} = item;
 
     if (cart) {
       let itemIndex = cart.items.findIndex((p) => p.productId == productId);
