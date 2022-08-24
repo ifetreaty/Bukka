@@ -3,7 +3,7 @@ const Cart = db.cart;
 const Meal = db.meal;
 
 exports.getCartItems = async (req, res) => {
-  const userId = req.params.id;
+  const userId = req.userId;
   try {
     let cart = await Cart.findOne({ userId });
     if (cart && cart.items.length > 0) {
