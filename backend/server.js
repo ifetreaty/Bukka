@@ -106,6 +106,7 @@ function initialCateg() {
   });
 }
 
+//TODO: create a .env.example file and add env variable fields w/o values
 db.mongoose
   .connect(dbConfig.url, {
     useNewUrlParser: true,
