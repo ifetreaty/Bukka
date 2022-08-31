@@ -2,15 +2,36 @@ const express = require("express");
 const router = express.Router();
 
 const controller = require("../controllers/meal.controller");
+const { authJwt } = require("../middlewares");
 
-router.get("/meals", controller.getMeals);
+router.get(
+  "/meals",
+  [authJwt.verifyToken, authJwt.isAdmin],
+  controller.getMeals
+);
 
-router.post("/meals", controller.addNewMeal);
+router.post(
+  "/meals",
+  [authJwt.verifyToken, authJwt.isAdmin],
+  controller.addNewMeal
+);
 
-router.get("/meals/:id", controller.getMeal);
+router.get(
+  "/meals/:id",
+  [authJwt.verifyToken, authJwt.isAdmin],
+  controller.getMeal
+);
 
-router.put("/meals/:id", controller.editMeal);
+router.put(
+  "/meals/:id",
+  [authJwt.verifyToken, authJwt.isAdmin],
+  controller.editMeal
+);
 
-router.delete("/meals/:id", controller.deleteMeal);
+router.delete(
+  "/meals/:id",
+  [authJwt.verifyToken, authJwt.isAdmin],
+  controller.deleteMeal
+);
 
 module.exports = router;

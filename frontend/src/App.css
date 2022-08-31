@@ -192,7 +192,8 @@ button:active {
 
 #homepage-body-header {
   margin-bottom: 1rem;
-  font-size: 2rem;
+  font-size: 1.8rem;
+  color: #23282b;
 }
 
 .homepage-body-button {
@@ -447,69 +448,89 @@ nav {
 .meal-list-title {
   margin-top: 7%;
   margin-left: 45%;
+  margin-bottom: 2.5rem;
+  color: #23282b;
 }
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 4%;
-  margin-left: 10%;
-  margin-right: 10%;
+  /* margin-left: 10%;
+  margin-right: 10%; */
   margin-top: 4%;
   max-width: 100%;
+  /* display: flex; */
+}
+
+.total-meals {
+  margin: 0 5% 0 10%;
 }
 
 .meal-card {
   position: relative;
   margin-bottom: 2rem;
-  padding: 1rem;
+  /* padding: .3rem; */
+  padding-top: .2rem;
+  padding-left: .3rem;
   padding-bottom: 2.2rem;
-  max-width: 15rem;
+  width: 24rem;
+  height: 8rem;
   background: #faf0f0;
   border: none;
   border-radius: 8px;
+  /* margin-right: 5%; */
+}
+
+.meal-card-flex {
+  display: flex;
 }
 
 .meal-card-image {
-  width: 15rem;
-  height: 11rem;
+  width: 14rem;
+  height: 10rem;
 }
 
 .meal-card-body {
-  padding-top: 1.5rem;
+  padding-top: 1rem;
   padding-bottom: 1rem;
+  margin-left: 1.5rem;
   max-width: 15rem;
-  text-align: center;
+  text-align: left;
 }
 
 .meal-card-name {
-  font-size: 1.5rem;
-  text-align: center;
-  height: 2rem;
+  font-size: 1rem;
+  text-align: left;
+ 
+  height: 1.4rem;
 }
 
 .meal-card-description {
-  padding-top: 1rem;
-  height: 3.5rem;
+  /* padding-top: .1rem; */
+  text-align: left;
+  /* height: 3.5rem; */
   font-size: 1rem;
 }
 
 .price {
   list-style-type: none;
   font-weight: bold;
-  font-size: 1.3rem;
-  text-align: center;
-  max-width: 15rem;
-  padding-top: 1.5rem;
+  font-size: 1rem;
+  /* text-align: center; */
+  /* max-width: 15rem; */
+  padding-top: .5rem;
 }
 
 .meal-card-button {
   padding: 0.8rem;
+  position: absolute;
   cursor: pointer;
   border-radius: 10px;
   border: none;
-  margin-top: 1.5rem;
+  margin-top: -4.3rem;
   margin-bottom: 1rem;
+  margin-left: 56%;
   background-color: rgb(185, 82, 42);
   text-align: center;
   transition: all 0.5s;
@@ -547,8 +568,8 @@ nav {
 
 .meal-card-delete-icon {
   position: absolute;
-  margin-left: 85%;
-
+  margin-left: 91%;
+  opacity: 0;
   margin-top: -22%;
   cursor: pointer;
 }
@@ -561,10 +582,11 @@ nav {
 .edit-icon {
   color: #000;
   position: absolute;
-  margin-left: 12.5rem;
+  margin-left: 92%;
   margin-top: -3.4rem;
   width: 10px;
   height: 2px;
+  opacity: 0;
   border-radius: 1px;
   border: solid 1px currentColor;
   -webkit-transform: rotate(-45deg);
@@ -582,6 +604,10 @@ nav {
   border-right: solid 5px currentColor;
   border-top: solid 2px transparent;
   border-bottom: solid 2px transparent;
+}
+
+.edit-icon:hover {
+  opacity: 0.8;
 }
 
 /* remove icon style */
@@ -940,14 +966,16 @@ ul.meal-tab-nav li.active {
 /* menu-style */
 .meal-card-delete-menu {
   position: absolute;
-  margin-left: 80%;
+  margin-left: 90%;
   margin-top: -8%;
   cursor: pointer;
   font-size: 50%;
+  opacity: 0;
 }
 
 .meal-card-delete-menu:hover {
-  opacity: 0.8;
+  opacity: 0.9;
+  color: red;
 }
 
 /*Pagination */

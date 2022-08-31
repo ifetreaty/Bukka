@@ -26,7 +26,8 @@ isAdmin = (req, res, next) => {
       res.status(500).send({ message: err });
       return;
     }
-
+    
+    console.log(Role);
     Role.find(
       {
         _id: { $in: user.roles },

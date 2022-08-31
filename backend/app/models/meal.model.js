@@ -7,7 +7,7 @@ module.exports = (mongoose, mongoosePaginate) => {
       price: { type: String, required: true },
       menuitem: [{ type: mongoose.Schema.Types.ObjectId, ref: "MenuItem" }],
     },
-    { timestamps: true },
+    { timestamps: true }
   );
   schema.plugin(mongoosePaginate);
   const Meal = mongoose.model("Meal", schema);
