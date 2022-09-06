@@ -10,8 +10,10 @@ import carouselThree from "../../assets/brand/bukka-landing-8.jpg";
 import carouselFour from "../../assets/brand/bukka-landing-11.jpg";
 import carouselFive from "../../assets/brand/bukka-landing-10.jpg";
 import Button from "./buttons";
+import LandingScreenTwo from "./screen-2.component";
 
 import "../../App.css";
+import LandingScreenThree from "./screen-3.component";
 
 const handleDragStart = (e) => e.preventDefault();
 
@@ -87,6 +89,8 @@ const LandingPage = () => {
           />
         </AliceCarousel>
       </div>
+      <LandingScreenTwo />
+      <LandingScreenThree />
     </div>
   );
 };
