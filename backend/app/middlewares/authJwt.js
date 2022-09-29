@@ -12,6 +12,7 @@ verifyToken = (req, res, next) => {
   }
 
   jwt.verify(token, config.secret, (err, decoded) => {
+    console.log(err);
     if (err) {
       return res.status(401).send({ message: "Unauthorized!" });
     }
@@ -26,7 +27,8 @@ isAdmin = (req, res, next) => {
       res.status(500).send({ message: err });
       return;
     }
-
+    
+    // console.log(Role);
     Role.find(
       {
         _id: { $in: user.roles },

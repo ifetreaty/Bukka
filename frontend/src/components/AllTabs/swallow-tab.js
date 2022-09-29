@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import menuService from "../../services/menu.service";
 import MealCard from "../MealComponents/meal-card.component";
 import { FaRegTrashAlt } from "react-icons/fa";
@@ -51,10 +51,10 @@ function SwallowTab() {
         <div className="meal-card">
           <MealCard
             key={menuitem._id}
-            image={menuitem.meal.image}
-            name={menuitem.meal.name}
-            description={menuitem.meal.description}
-            price={menuitem.meal.price}
+            image={menuitem?.meal?.image}
+            name={menuitem?.meal?.name}
+            description={menuitem?.meal?.description}
+            price={menuitem?.meal?.price}
           />
           <div
             className="meal-card-delete-menu"

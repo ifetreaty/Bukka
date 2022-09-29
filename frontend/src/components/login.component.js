@@ -1,17 +1,10 @@
-import React, { Component, useContext, useEffect } from "react";
-import axios from "axios";
+import React, { useContext } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import UserContext from "../context/userContext";
-import useUserContext from "../context/useUserContext";
-import NavBar from "./admin-homepage.component";
-import UserHomePage from "./user-homepage.component";
-
 import AuthService from "../services/auth.service";
-import userService from "../services/user.service";
-import authHeader from "../services/auth-header";
 
 const required = (value) => {
   if (!value) {
@@ -36,8 +29,6 @@ const Login = () => {
   });
   const form = React.useRef();
   const checkBtn = React.useRef();
-
-  const userRef = React.useRef();
 
   const handleLogin = (e) => {
     e.preventDefault();

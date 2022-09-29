@@ -2,7 +2,7 @@ import axios from "axios";
 
 //refactored
 const http = axios.create({
-  baseURL: "http://localhost:8080/api",
+  baseURL: process.env.REACT_APP_BASE_URL
 });
 
 export default http;

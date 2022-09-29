@@ -1,9 +1,13 @@
+require("express-async-errors");
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const cloudinary = require("cloudinary");
 const dotenv = require("dotenv");
 const multer = require("multer");
+const passport = require("passport");
+const mongoose = require("mongoose");
+// const MongoStore = require("connect-mongo")(session);
 
 require("dotenv").config();
 
@@ -16,6 +20,14 @@ app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// app.use(session({
+//   secret: 'treatysecret',
+//   resave: false,
+//   saveUninitialized: false,
+//   store: new MongoStore({ mongooseConnection: mongooseConnection }),
+//   cookie: { maxAge: 2500 * 60 * 1000 }
+// }));
+
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to Bukka." });
 });
@@ -23,7 +35,7 @@ app.get("/", (req, res) => {
 require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8085;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
@@ -45,7 +57,7 @@ const createAdminUser = async () => {
       const adminUsers = await User.find({
         roles: adminRole.id,
       });
-      if (adminUsers?.length < 1) {
+      if (adminUsers.length < 1) {
         await User.create({
           name: "Admin",
           username: "admin",
@@ -106,6 +118,7 @@ function initialCateg() {
   });
 }
 
+//TODO: create a .env.example file and add env variable fields w/o values
 db.mongoose
   .connect(dbConfig.url, {
     useNewUrlParser: true,
@@ -129,6 +142,52 @@ app.use("/api", require("./app/routes/file-upload.routes"));
 
 app.use("/api", require("./app/routes/menu.routes"));
 
+app.use("/api", require("./app/routes/cart.routes"));
+
+app.use((error, req, res, next) => {
+  let errorData = {
+    name: "UnhandledException",
+    statusCode: 500,
+    message: "Something went wrong!",
+    errors: {},
+  };
+  if (error instanceof mongoose.Error.CastError) {
+    const data = {
+      [error.path]: error.message,
+    };
+    errorData = {
+      ...errorData,
+      name: "CastError",
+      statusCode: 400,
+      message: error.message,
+      errors: data,
+    };
+  }
+  if (error instanceof mongoose.Error.ValidationError) {
+    const data = Object.keys(error.errors).reduce((result, val) => {
+      const value = val === "userId" ? "global" : val;
+      if (!Object.prototype.hasOwnProperty.call(result, value)) {
+        result[value] = [];
+      }
+
+      result[value].push(
+        error.errors[value].message.replace("Path ", "").trim()
+      );
+      return result;
+    }, {});
+
+    errorData = {
+      ...errorData,
+      name: "ValidationError",
+      statusCode: 400,
+      message: error.message,
+      errors: data,
+    }; // https://github.com/fidelisojeah/todo/blob/master/src/utils/error-handler.ts
+  }
+  return res.status(errorData.statusCode).send({
+    ...errorData,
+  });
+});
 // allow access to the API from different domains/origins
 app.use(
   cors({

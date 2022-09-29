@@ -4,12 +4,15 @@ const errorHandler = (err) => {
   throw err;
 };
 
-export default {
+const user = JSON.parse(localStorage.getItem("user"));
+const mealService = {
   handleUpload(file) {
+    console.log(user, "mama");
     return http
       .post("/upload", file, {
         headers: {
           "Content-Type": "multipart/form-data",
+          "x-access-token": user.accessToken,
         },
       })
       .then((res) => res.data)
@@ -18,14 +21,22 @@ export default {
 
   saveNewMeal(newMeal) {
     return http
-      .post("/meals", newMeal)
+      .post("/meals", newMeal, {
+        headers: {
+          "x-access-token": user.accessToken,
+        },
+      })
       .then((res) => res.data)
       .catch(errorHandler);
   },
 
   getMeal(id) {
     return http
-      .get(`/meals/${id}`)
+      .get(`/meals/${id}`, {
+        headers: {
+          "x-access-token": user.accessToken,
+        },
+      })
       .then((res) => res.data)
       .catch(errorHandler);
   },
@@ -33,22 +44,36 @@ export default {
   editMeal(meal, id) {
     console.log(meal);
     return http
-      .put(`/meals/${id}`, meal)
+      .put(`/meals/${id}`, meal, {
+        headers: {
+          "x-access-token": user.accessToken,
+        },
+      })
       .then((res) => res.data)
       .catch(errorHandler);
   },
 
   deleteMeal(id) {
     return http
-      .delete(`/meals/${id}`)
+      .delete(`/meals/${id}`, {
+        headers: {
+          "x-access-token": user.accessToken,
+        },
+      })
       .then((res) => res.data)
       .catch(errorHandler);
   },
 
   getMeals(pageNumber) {
     return http
-      .get(`/meals?page=${pageNumber}`)
+      .get(`/meals?page=${pageNumber}`, {
+        headers: {
+          "x-access-token": user.accessToken,
+        },
+      })
       .then((res) => res.data)
       .catch(errorHandler);
   },
 };
+
+export default mealService;

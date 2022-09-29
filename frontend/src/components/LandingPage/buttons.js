@@ -1,4 +1,5 @@
 import React, { useState, Fragment } from "react";
+import { Link } from "react-router-dom";
 
 const Button = () => {
   const [active, setActive] = useState("");
@@ -18,14 +19,16 @@ const Button = () => {
         Order Now
       </button>
 
-      <button
-        key={2}
-        className={active === "2" ? "active-btn" : "landing-page-button"}
-        id={"2"}
-        onClick={handleClick}
-      >
-        View Menu
-      </button>
+      <Link to="/today-menu">
+        <button
+          key={2}
+          className={active === "2" ? "active-btn" : "landing-page-button"}
+          id={"2"}
+          onClick={handleClick}
+        >
+          <span>View Menu</span>
+        </button>
+      </Link>
 
       {/* <button
         key={3}

@@ -2,11 +2,13 @@ module.exports = (mongoose, mongoosePaginate) => {
   var schema = mongoose.Schema({
     meal: {
       type: mongoose.Schema.Types.ObjectId,
+      required: true,
       ref: "Meal",
     },
 
     category: {
       type: mongoose.Schema.Types.ObjectId,
+      required: true,
       ref: "Category",
     },
   });

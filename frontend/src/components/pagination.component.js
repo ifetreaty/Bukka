@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import mealService from "../services/meal.service";
-import { Link } from "react-router-dom";
+import React from "react";
 
 const Pagination = ({ page, pages, changePage }) => {
   let middlePagination;

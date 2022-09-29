@@ -10,14 +10,14 @@ const UserHomePage = () => {
   console.log(user);
   return (
     <>
-      <nav className="background">
-        <img src={brandLogo} className="brand-logo" />
+      <nav className="nav-background">
+        <img src={brandLogo} className="brand-logo" alt="" />
         <div className="NavMenu">
           <NavLink to="/today-menu" className="nav-link-no-land">
             Menu
           </NavLink>
           <NavLink to="/my-orders" className="nav-link-no-land">
-            My Orders
+            Cart
           </NavLink>
           <NavLink to="#" className="nav-link-no-land">
             Log Out
