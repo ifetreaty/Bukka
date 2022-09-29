@@ -34,7 +34,7 @@ const LandingScreenThree = () => {
           </p>
         </div>
         <div className="landing-screen-about-image">
-          <img src={BukkaLogo} />
+          <img src={BukkaLogo} alt="" />
         </div>
       </div>
     </div>

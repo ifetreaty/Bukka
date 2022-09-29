@@ -1,5 +1,7 @@
+const { menuitem } = require("../models");
 const db = require("../models");
 const Meal = db.meal;
+const MenuItem = db.menuitem;
 
 exports.getMeals = async (req, res) => {
   try {
@@ -14,12 +16,12 @@ exports.getMeals = async (req, res) => {
 
     query = query.skip(skip).limit(pageSize);
 
-    if (page > pages) {
-      return res.status(404).json({
-        status: "fail",
-        message: "No page found",
-      });
-    }
+    // if (page > pages) {
+    //   return res.status(404).json({
+    //     status: "fail",
+    //     message: "No page found",
+    //   });
+    // }
 
     const result = await query;
 
@@ -49,16 +51,15 @@ exports.addNewMeal = (req, res) => {
     });
 };
 
-exports.deleteMeal = (req, res) => {
-  Meal.findByIdAndRemove(req.params.id, req.body)
-    .then((meal) => {
-      res.status(200).json({
-        msg: meal,
-      });
-    })
-    .catch((err) => {
-      res.status(404).send({ message: "Failed", err });
-    });
+exports.deleteMeal = async (req, res) => {
+  // Meal.findByIdAndRemove(req.params.id, req.body)
+  try {
+    await Meal.deleteMany({ _id: req.params.id });
+    await MenuItem.deleteMany({ meal: req.params.id });
+    res.status(204).send();
+  } catch (err) {
+    res.status(404).send({ message: "Failed", err });
+  }
 };
 
 exports.getMeal = (req, res) => {

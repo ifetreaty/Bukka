@@ -18,7 +18,6 @@ router.delete(
 );
 router.get(
   "/menu/items/category/:id",
-  authJwt.verifyToken,
   controller.getMenuItemsInCategory
 );
 

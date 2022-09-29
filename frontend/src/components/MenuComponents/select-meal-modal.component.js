@@ -1,17 +1,14 @@
 import { FaRegWindowClose } from "react-icons/fa";
 import React, { useState } from "react";
-import { withAlert } from "react-alert";
 import { useNavigate } from "react-router-dom";
 import "../../App.css";
 import CategorySelect from "./category-select.component";
 import menuService from "../../services/menu.service";
 
 const Modal = ({ setIsOpen, mealId }) => {
-  const [meal, setMeal] = useState(mealId);
   const [category, setCategory] = useState("6231da8ecece324534b292da");
 
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState();
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
@@ -21,7 +18,7 @@ const Modal = ({ setIsOpen, mealId }) => {
       setSubmitting(true);
 
       await menuService.saveMenuItem({
-        meal,
+        mealId,
         category,
       });
       navigate("/admin/menu");

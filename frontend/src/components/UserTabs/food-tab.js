@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo } from "react";
 import menuService from "../../services/menu.service";
 import MealCard from "../MealComponents/meal-card.component";
 import SelectMeal from "../User/MenuComponents/add-to-cart.component";
-import { FaRegTrashAlt } from "react-icons/fa";
 
 function FoodTab() {
   const [menuItems, setMenuItems] = useState([]);
@@ -34,29 +33,17 @@ function FoodTab() {
 
   let foodCategoryList = useMemo(getFoodCategory, [foodCategory, menuItems]);
 
-  const removeMeal = (id) => {
-    menuService.deleteMenuItem(id).then((res) => {
-      setMenuItems((menuItem) => menuItem?.filter((meal) => meal._id !== id));
-    });
-  };
-
   return (
     <div className="cards">
       {foodCategoryList?.map((menuitem) => (
         <div className="meal-card">
           <MealCard
             key={menuitem._id}
-            image={menuitem.meal.image}
-            name={menuitem.meal.name}
-            description={menuitem.meal.description}
-            price={menuitem.meal.price}
+            image={menuitem?.meal?.image}
+            name={menuitem?.meal?.name}
+            description={menuitem?.meal?.description}
+            price={menuitem?.meal?.price}
           />
-          {/* <div
-            className="meal-card-delete-menu"
-            onClick={(e) => removeMeal(menuitem._id, e)}
-          >
-            <FaRegTrashAlt />
-          </div> */}
           <div className="meal-card-body">
               <SelectMeal mealId={menuitem._id} />
             </div>

@@ -50,10 +50,10 @@ function DessertTab() {
         <div className="meal-card">
           <MealCard
             key={menuitem._id}
-            image={menuitem.meal.image}
-            name={menuitem.meal.name}
-            description={menuitem.meal.description}
-            price={menuitem.meal.price}
+            image={menuitem?.meal?.image}
+            name={menuitem?.meal?.name}
+            description={menuitem?.meal?.description}
+            price={menuitem?.meal?.price}
           />
           <div
             className="meal-card-delete-menu"

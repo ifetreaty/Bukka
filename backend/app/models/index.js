@@ -17,7 +17,7 @@ db.role = require("./role.model.js");
 
 db.ROLES = ["user", "admin"];
 
-db.meal = require("./meal.model.js")(mongoose, mongoosePaginate);
+db.meal = require("./meal.model.js");
 
 db.menuitem = require("./menu-item.model")(mongoose, mongoosePaginate);
 

@@ -14,12 +14,12 @@ exports.getMenuItems = async (req, res) => {
 
     query = query.skip(skip).limit(pageSize);
 
-    if (page > pages) {
-      return res.status(404).json({
-        status: "fail",
-        message: "No page found",
-      });
-    }
+    // if (page > pages) {
+    //   return res.status(404).json({
+    //     status: "fail",
+    //     message: "No page found",
+    //   });
+    // }
 
     const result = await query;
 
@@ -41,7 +41,7 @@ exports.getMenuItems = async (req, res) => {
 
 exports.addMenuItem = (req, res) => {
   const menuItem = new MenuItem({
-    meal: req.body.meal,
+    meal: req.body.mealId,
     category: req.body.category,
   });
 

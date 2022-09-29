@@ -57,10 +57,10 @@ const TotalMeals = () => {
           <div className="meal-card total-meal-card">
             <MealCard
               key={meal._id}
-              image={meal.image}
-              name={meal.name}
-              description={meal.description}
-              price={meal.price}
+              image={meal?.image}
+              name={meal?.name}
+              description={meal?.description}
+              price={meal?.price}
             />
             <div className="meal-card-body">
               <SelectMeal mealId={meal._id} />

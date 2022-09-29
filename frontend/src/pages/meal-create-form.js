@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import mealService from "../services/meal.service";
 import "../App.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const required = (value) => {
@@ -44,7 +44,6 @@ function MealForm() {
     await notify;
 
     navigate("/admin/meals");
-    window.location.reload();
   }
 
   return (

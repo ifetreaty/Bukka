@@ -6,6 +6,6 @@ const cartValidation = require("../middlewares/cart.validator");
 
 router.get("/cart", authJwt.verifyToken, controller.getCartItems);
 router.post("/cart", authJwt.verifyToken, cartValidation, controller.addToCart);
-router.delete("/cart/:itemId", authJwt.verifyToken, controller.deleteItem);
+router.delete("/cart", authJwt.verifyToken, controller.deleteItem);
 
 module.exports = router;

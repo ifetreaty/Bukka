@@ -6,6 +6,7 @@ export const UserProvider = ({ children }) => {
   const [user, setLoginUser] = useState(null);
   useEffect(() => {
     const currentUser = AuthService.getCurrentUser();
+    console.log(currentUser);
     setLoginUser(currentUser);
   }, []);
 

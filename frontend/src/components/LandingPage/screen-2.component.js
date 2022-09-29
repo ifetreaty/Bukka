@@ -7,47 +7,47 @@ import deliveryIcon from "../../assets/delivery.png";
 
 const LandingScreenTwo = () => {
   return (
-    <div className="landing-screen-takeout">
-      <p className="landing-screen-takeout-header">
-        ORDER DELIVERY AND TAKEOUT
+    <div className="landing-screen-collection">
+      <p className="landing-screen-collection-header">
+        ORDER DELIVERY AND COLLECTION
       </p>
-      <p className="landing-screen-takeout-text">
+      <p className="landing-screen-collection-text">
         Bukka offers you numerous options. You can place an order and have it
-        delivered to you within 20 minutes. If you'd also prefer the Take out
-        option, you can come to our location and pick up your meal.
+        delivered to you within 20 minutes. If you'd also prefer to collect, you
+        can come to our location and pick up your meal.
       </p>
-      <hr className="hr-takeout-screen"></hr>
+      <hr className="hr-collection-screen"></hr>
       <div className="landing-screen-search">
         <SearchBox />
         <SearchButton />
       </div>
       <div className="landing-screen-delivery-process">
         <div className="delivery-process-icons">
-          <img src={foodIcon} className="delivery-process-icon" />
+          <img src={foodIcon} className="delivery-process-icon" alt="" />
           <p>Select Food</p>
         </div>
         <div className="delivery-process-icons">
-          <img src={orderIcon} className="delivery-process-icon" />
+          <img src={orderIcon} className="delivery-process-icon" alt="" />
           <p>Order Food</p>
         </div>
         <div className="delivery-process-icons">
-          <img src={deliveryIcon} className="delivery-process-icon" />
-          <p>Delivery or Take Out</p>
+          <img src={deliveryIcon} className="delivery-process-icon" alt="" />
+          <p>Delivery or Collection</p>
         </div>
       </div>
       <div className="broken-arrows">
-      <div class="content">
-        <div class="arrow">
-          <div class="curve"></div>
-          <div class="point"></div>
+        <div className="content">
+          <div className="arrow">
+            <div className="curve"></div>
+            <div className="point"></div>
+          </div>
         </div>
-      </div>
-      <div class="content-2">
-        <div class="arrow-2">
-          <div class="curve-2"></div>
-          <div class="point-2"></div>
+        <div className="content-2">
+          <div className="arrow-2">
+            <div className="curve-2"></div>
+            <div className="point-2"></div>
+          </div>
         </div>
-      </div>
       </div>
     </div>
   );

@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import Home from "./landing-page.component";
-
 import UserService from "../services/user.service";
 
 export default class BoardUser extends Component {
@@ -37,7 +35,6 @@ export default class BoardUser extends Component {
       <div className="container">
         <header className="jumbotron">
           <h3>{this.state.content}</h3>
-          {/* <Home /> */}
         </header>
       </div>
     );

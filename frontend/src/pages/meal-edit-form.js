@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate, useParams, useRouteMatch } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import mealService from "../services/meal.service";
 import "../App.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const required = (value) => {
@@ -18,7 +18,6 @@ const required = (value) => {
 function EditForm() {
   const imageRef = useRef();
   const imagePreviewRef = useRef();
-  const [meals, setMeals] = useState([]);
   const [meal, setMeal] = useState({
     name: "",
     description: "",
@@ -48,7 +47,7 @@ function EditForm() {
     fetchData();
 
     return;
-  }, []);
+  });
 
   async function handleUpdate(e) {
     e.preventDefault();
@@ -59,8 +58,6 @@ function EditForm() {
     if (imageRef.current.files.length > 0) {
       const formData = new FormData();
       formData.append("file", imageRef.current.files[0]);
-
-      const res = await mealService.handleUpload(formData);
     }
     const id = params.id.toString();
     const formData = new FormData();
@@ -124,7 +121,7 @@ function EditForm() {
               ref={imagePreviewRef}
               id="blah"
               src="#"
-              alt="your image"
+              alt=""
             />
             <input
               id="image"

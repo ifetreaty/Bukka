@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
-import UserContext from "../../context/userContext";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import brandLogo from "../../assets/brand/new-logo-2-removebg-preview.png";
@@ -18,11 +17,10 @@ import LandingScreenThree from "./screen-3.component";
 const handleDragStart = (e) => e.preventDefault();
 
 const LandingPage = () => {
-  const { user } = useContext(UserContext);
   return (
-    <div className="background">
+    <div className="landing-background">
       <nav>
-        <img src={brandLogo} className="brand-logo" />
+        <img src={brandLogo} className="brand-logo" alt="" />
         <div className="NavMenu">
           <NavLink to="/" className="nav-link">
             Home
@@ -31,7 +29,7 @@ const LandingPage = () => {
             Today
           </NavLink>
           <NavLink to="/login" className="nav-link">
-            Pricing
+            Cart
           </NavLink>
           <NavLink to="/register" className="nav-link">
             Get Started
@@ -65,27 +63,27 @@ const LandingPage = () => {
           <img
             src={carouselOne}
             onDragStart={handleDragStart}
-            className="sliderimg"
+            className="sliderimg" alt=""
           />
           <img
             src={carouselTwo}
             onDragStart={handleDragStart}
-            className="sliderimg"
+            className="sliderimg" alt=""
           />
           <img
             src={carouselThree}
             onDragStart={handleDragStart}
-            className="sliderimg"
+            className="sliderimg" alt=""
           />
           <img
             src={carouselFour}
             onDragStart={handleDragStart}
-            className="sliderimg"
+            className="sliderimg" alt=""
           />
           <img
             src={carouselFive}
             onDragStart={handleDragStart}
-            className="sliderimg"
+            className="sliderimg" alt=""
           />
         </AliceCarousel>
       </div>

@@ -1,4 +1,5 @@
-module.exports = (mongoose, mongoosePaginate) => {
+const mongoose = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate-v2");
   var schema = mongoose.Schema(
     {
       name: { type: String, required: true },
@@ -9,7 +10,11 @@ module.exports = (mongoose, mongoosePaginate) => {
     },
     { timestamps: true }
   );
+  // schema.pre('remove', function(next){
+  //   console.log(this.db);
+  //   this.db.model("MenuItem").deleteMany({ menu: this._id }).exec();
+  //   next();
+  // })
   schema.plugin(mongoosePaginate);
   const Meal = mongoose.model("Meal", schema);
-  return Meal;
-};
+  module.exports = Meal;

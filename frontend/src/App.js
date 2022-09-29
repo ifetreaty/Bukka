@@ -1,16 +1,11 @@
-import React, { useMemo } from "react";
-
+import React from "react";
 import "./App.css";
+
 import LandingPage from "./components/LandingPage/landing-page.component";
-import UserHomePage from "./components/user-homepage.component";
 import Login from "./components/login.component";
 import Register from "./components/register.component";
-import BoardUser from "./components/board-user.component";
 import BoardAdmin from "./components/board-admin.component";
-import AdminHome from "./components/admin-homepage.component";
 import { Routes, Route } from "react-router-dom";
-import { useState } from "react";
-
 import AddMeal from "./components/MealComponents/meals.component";
 import AdminMenu from "./components/MenuComponents/admin-menu.component";
 import UserMenu from "./components/MenuComponents/user-menu.component";
@@ -18,8 +13,6 @@ import Orders from "./components/orders.component";
 import MealForm from "./pages/meal-create-form";
 import TotalMeals from "./components/MealComponents/TotalMeals.component";
 import EditForm from "./pages/meal-edit-form";
-import MealPagination from "./components/MealComponents/meal-pagination";
-import { UserProvider } from "./context/UserProvider";
 import Layout from "./components/layout.component";
 import RequireAuth from "./components/require-auth.component";
 import Unauthorized from "./components/unauthorized.component";
@@ -31,16 +24,12 @@ const ROLES = {
 };
 
 function App() {
-  const [user, setLoginUser] = useState({});
-
-  const value = useMemo(() => ({ user, setLoginUser }), [user, setLoginUser]);
-
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         {/* public routes */}
         <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<Login setLoginUser={setLoginUser} />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
 
@@ -49,25 +38,18 @@ function App() {
           path="/welcome"
           element={
             <RequireAuth allowedRoles={[ROLES.User]}>
-              <UserHomePage />
-            </RequireAuth>
-          }
-        ></Route>
-
-        <Route
-          path="/today-menu"
-          element={
-            <RequireAuth allowedRoles={[ROLES.User]}>
               <UserMenu />
             </RequireAuth>
           }
         ></Route>
 
+        <Route path="/today-menu" element={<UserMenu />} />
+
         <Route
           path="/admin"
           element={
             <RequireAuth allowedRoles={[ROLES.Admin]}>
-              <AdminHome />
+              <AddMeal />
             </RequireAuth>
           }
         ></Route>

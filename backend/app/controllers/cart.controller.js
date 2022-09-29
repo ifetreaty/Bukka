@@ -6,88 +6,59 @@ exports.getCartItems = async (req, res) => {
   const userId = req.userId;
   try {
     let cart = await Cart.findOne({ userId });
-    if (cart && cart.items.length > 0) {
+    if (cart) {
       res.send(cart);
     } else {
-      res.status(404).json({message: "Cart not found"});
+      res.status(404).json({ message: "Cart not found" });
     }
   } catch (err) {
     console.log(err);
-    res.status(500).json({message: "Something went wrong!"});
+    res.status(500).json({ message: "Something went wrong!" });
   }
 };
 
 exports.addToCart = async (req, res) => {
   const userId = req.userId;
-  // const { productId, quantity } = req.body;
-  const productId = req.body.items.productId;
   const quantity = req.body.items.quantity;
 
-  // for(let i = 0; )
-
-  try {
-    let cart = await Cart.findOne({ userId });
-    let item = await Meal.findOne({ _id: productId });
-    if (!item) {
-      console.log(userId);
-      res.status(404).json({message: "Meal not found!"});
-    }
-    const {price, name} = item;
-
-    if (cart) {
-      let itemIndex = cart.items.findIndex((p) => p.productId == productId);
-
-      if (itemIndex > -1) {
-        let productItem = cart.items[itemIndex];
-        productItem.quantity += quantity;
-        cart.items[itemIndex] = productItem;
-      } else {
-        cart.items.push({ productId, name, quantity, price });
-      }
-      cart.total += quantity * price;
-      cart = await cart.save();
-      return res.status(201).send(cart);
-    } else {
-      const newCart = await Cart.create({
-        userId,
-        items: [{ productId, name, quantity, price }],
-        total: quantity * price,
-      });
-      return res.status(201).send(newCart);
-    }
-  } catch (err) {
-    console.log(err);
-    res.status(500).send("Something went wrong");
+  const items = req.body.items;
+  let cart = await Cart.findOne({ userId });
+  if (!cart) {
+    await new Cart({
+      userId,
+    }).save();
   }
+  const addedCart = await Cart.updateOne(
+    { userId },
+    {
+      $push: {
+        items,
+      },
+    },
+    { runValidators: true, new: true }
+  );
+  console.log(addedCart, "fido");
+  res.status(204).send();
 };
 
-// exports.addToCart = (req, res) => {
-//   Cart.create(req.body)
-//     .then((cart) => {
-//       res.status(200).json({ cart: "item added successfully" });
-//     })
-//     .catch((err) => {
-//       res.status(400).send("adding new item failed");
-//     });
-// };
-
 exports.deleteItem = async (req, res) => {
-  const userId = req.params.userId;
-  const productId = req.params.itemId;
-  try{
-      let cart = await Cart.findOne({userId});
-      let itemIndex = cart.items.findIndex(p => p.productId == productId);
-      if(itemIndex > -1)
-      {
-          let productItem = cart.items[itemIndex];
-          cart.total -= productItem.quantity * productItem.price;
-          cart.items.splice(itemIndex,1);
-      }
-      cart = await cart.save();
-      return res.status(201).send(cart);
+  const userId = req.userId;
+  const itemId = req.query.itemId.split(",");
+
+  const cart = await Cart.findOne({ userId });
+  if (!cart) {
+    return res.status(404).send("Cart not found!");
   }
-  catch (err) {
-      console.log(err);
-      res.status(500).send("Something went wrong");
-  }
-}
+  await Cart.updateOne(
+    { userId },
+    {
+      $pull: {
+        items: { _id: { $in: itemId } },
+      }, // https://www.mongodb.com/docs/manual/reference/operator/update/pullAll/
+    }
+  );
+  res.status(204).send();
+};
+
+// Frontend Todo: mealId
+// items.filter(item =>.item.mealId._id === mealId).map(({_id) => _id)
