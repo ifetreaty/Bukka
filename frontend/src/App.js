@@ -14,6 +14,7 @@ import MealForm from "./pages/meal-create-form";
 import TotalMeals from "./components/MealComponents/TotalMeals.component";
 import EditForm from "./pages/meal-edit-form";
 import Layout from "./components/layout.component";
+import ShoppingCart from "./components/CartComponents/cart.component";
 import RequireAuth from "./components/require-auth.component";
 import Unauthorized from "./components/unauthorized.component";
 import Missing from "./components/missing.component";
@@ -44,6 +45,17 @@ function App() {
         ></Route>
 
         <Route path="/today-menu" element={<UserMenu />} />
+
+        {/* <Route
+          path="/cart"
+          element={
+            <RequireAuth allowedRoles={[ROLES.User]}>
+              <ShoppingCart />
+            </RequireAuth>
+          }
+        ></Route> */}
+
+        <Route path="/cart" element={<ShoppingCart />} />
 
         <Route
           path="/admin"

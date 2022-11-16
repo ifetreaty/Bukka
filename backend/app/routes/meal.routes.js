@@ -34,4 +34,10 @@ router.delete(
   controller.deleteMeal
 );
 
+router.get(
+  "/categories",
+  [authJwt.verifyToken, authJwt.isAdmin],
+  controller.getCategories
+);
+
 module.exports = router;

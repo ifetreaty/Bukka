@@ -74,6 +74,17 @@ const mealService = {
       .then((res) => res.data)
       .catch(errorHandler);
   },
+
+  getCategories() {
+    return http
+      .get(`/categories`, {
+        headers: {
+          "x-access-token": user.accessToken,
+        },
+      })
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
 };
 
 export default mealService;

@@ -3,7 +3,7 @@ const MenuItem = db.menuitem;
 
 exports.getMenuItems = async (req, res) => {
   try {
-    let query = MenuItem.find();
+    let query = MenuItem.find({});
 
     const page = parseInt(req.query.page) || 1;
     const pageSize = parseInt(req.query.limit) || 8;
@@ -13,13 +13,6 @@ exports.getMenuItems = async (req, res) => {
     const pages = Math.ceil(total / pageSize);
 
     query = query.skip(skip).limit(pageSize);
-
-    // if (page > pages) {
-    //   return res.status(404).json({
-    //     status: "fail",
-    //     message: "No page found",
-    //   });
-    // }
 
     const result = await query;
 
@@ -41,7 +34,7 @@ exports.getMenuItems = async (req, res) => {
 
 exports.addMenuItem = (req, res) => {
   const menuItem = new MenuItem({
-    meal: req.body.mealId,
+    meal: req.body.meal,
     category: req.body.category,
   });
 

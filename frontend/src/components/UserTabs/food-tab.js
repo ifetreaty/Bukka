@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import menuService from "../../services/menu.service";
 import MealCard from "../MealComponents/meal-card.component";
-import SelectMeal from "../User/MenuComponents/add-to-cart.component";
+import SelectMeal from "../CartComponents/add-to-cart.component";
 
 function FoodTab() {
   const [menuItems, setMenuItems] = useState([]);

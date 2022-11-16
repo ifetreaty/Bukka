@@ -18,6 +18,7 @@ const TotalMeals = () => {
 
   const [page, setPage] = useState(pageNumber);
   const [pages, setPages] = useState(1);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     const fetchMeals = async () => {
@@ -41,11 +42,23 @@ const TotalMeals = () => {
     fetchMeals();
   }, [page]);
 
+  useEffect(() => {
+    async function getCategories() {
+      const currentCategories = await mealService.getCategories();
+      setCategories(currentCategories);
+    }
+    getCategories();
+  }, []);
+
   const removeMeal = (id) => {
     mealService.deleteMeal(id).then((res) => {
       setMeals((meals) => meals.filter((meal) => meal._id !== id));
     });
   };
+
+  if (!categories) {
+    return null;
+  }
 
   return (
     <div>
@@ -54,16 +67,15 @@ const TotalMeals = () => {
       </div>
       <div className="cards total-meals">
         {meals.map((meal) => (
-          <div className="meal-card total-meal-card">
+          <div className="meal-card total-meal-card" key={meal._id}>
             <MealCard
-              key={meal._id}
               image={meal?.image}
               name={meal?.name}
               description={meal?.description}
               price={meal?.price}
             />
             <div className="meal-card-body">
-              <SelectMeal mealId={meal._id} />
+              <SelectMeal mealId={meal._id} categories={categories} />
             </div>
             <div className="meal-card-edit-icon">
               <Link to={`/admin/meals/edit/${meal._id}`}>

@@ -1,5 +1,4 @@
 import { createContext } from "react";
 
-const UserContext = createContext({});
-// export const UserProvider = UserContext.Provider;
+const UserContext = createContext({ loading: true });
 export default UserContext;

@@ -45,7 +45,12 @@ const Login = () => {
       AuthService.login(state.username, state.password).then(
         (data) => {
           setLoginUser(data);
-          setState("");
+          setState({
+            username: "",
+            password: "",
+            loading: false,
+            message: "",
+          });
           navigate(from, { replace: true });
         },
         (error) => {

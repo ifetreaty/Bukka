@@ -5,8 +5,8 @@ import "../../App.css";
 import CategorySelect from "./category-select.component";
 import menuService from "../../services/menu.service";
 
-const Modal = ({ setIsOpen, mealId }) => {
-  const [category, setCategory] = useState("6231da8ecece324534b292da");
+const Modal = ({ setIsOpen, mealId, categories }) => {
+  const [category, setCategory] = useState(categories[0]?.value || "");
 
   const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
@@ -14,16 +14,15 @@ const Modal = ({ setIsOpen, mealId }) => {
   async function handleSubmit(e) {
     try {
       e.preventDefault();
-
       setSubmitting(true);
 
       await menuService.saveMenuItem({
-        mealId,
+        meal: mealId,
         category,
       });
       navigate("/admin/menu");
-      window.location.reload();
     } catch (err) {
+      console.log(err, "hey hey");
       alert("This meal has already been added");
     } finally {
       setSubmitting(false);
@@ -42,7 +41,11 @@ const Modal = ({ setIsOpen, mealId }) => {
             <FaRegWindowClose style={{ marginBottom: "-3px" }} />
           </button>
           <div className="modalContent">
-            <CategorySelect onChange={(e) => setCategory(e.target.value)} />
+            <CategorySelect
+              onChange={setCategory}
+              categories={categories}
+              category={category}
+            />
           </div>
           <div className="modalActions">
             <div className="actionsContainer">
