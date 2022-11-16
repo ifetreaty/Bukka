@@ -1,66 +1,51 @@
-import React, { useState } from "react";
-import FoodTab from "../components/AllTabs/food-tab";
-import SwallowTab from "../components/AllTabs/swallow-tab";
-import SnackTab from "../components/AllTabs/snack-tab";
-import DessertTab from "../components/AllTabs/dessert-tab";
-import DrinkTab from "../components/AllTabs/drinks-tab";
+import React, { useState, useEffect } from "react";
+import mealService from "../services/meal.service";
 import TabNavItem from "../components/tab-nav-item.component";
 import TabContent from "../components/tab-content.component";
+import Tab from "../components/AdminTabs/tab";
 
 const MealTabs = () => {
-  const [activeTab, setActiveTab] = useState("foodTab");
+  const [activeTab, setActiveTab] = useState("");
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    async function getCategories() {
+      const currentCategories = await mealService.getCategories();
+      setCategories(currentCategories);
+      setActiveTab(currentCategories?.[0]?.value);
+    }
+    getCategories();
+  }, []);
+
+  if (!categories) {
+    return null;
+  }
   return (
     <div className="meal-tabs">
       <ul className="meal-tab-nav">
-        <TabNavItem
-          title="Food"
-          id="foodTab"
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-        />
-        <TabNavItem
-          title="Swallow"
-          id="swallowTab"
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-        />
-        <TabNavItem
-          title="Snack"
-          id="snackTab"
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-        />
-        <TabNavItem
-          title="Dessert"
-          id="dessertTab"
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-        />
-        <TabNavItem
-          title="Drink"
-          id="drinkTab"
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-        />
+        {categories.map((category) => (
+          <TabNavItem
+            title={category.label}
+            id={category.value}
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            key={category.value}
+          />
+        ))}
       </ul>
       <div className="meal-tab-content">
-        <TabContent id="foodTab" activeTab={activeTab}>
-          <FoodTab />
-        </TabContent>
-        <TabContent id="swallowTab" activeTab={activeTab}>
-          <SwallowTab />
-        </TabContent>
-        <TabContent id="snackTab" activeTab={activeTab}>
-          <SnackTab />
-        </TabContent>
-        <TabContent id="dessertTab" activeTab={activeTab}>
-          <DessertTab />
-        </TabContent>
-        <TabContent id="drinkTab" activeTab={activeTab}>
-          <DrinkTab />
-        </TabContent>
+        {categories.map((category) => (
+          <TabContent
+            id={category.value}
+            activeTab={activeTab}
+            key={`content-${category.value}`}
+          >
+            <Tab id={category.value} />
+          </TabContent>
+        ))}
       </div>
     </div>
   );
 };
+
 export default MealTabs;

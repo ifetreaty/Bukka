@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
-const CategorySelect = ({ onChange }) => {
-  const [category, setCategory] = useState("6231da8ecece324534b292da");
-
+const CategorySelect = ({ onChange, categories, category }) => {
   const handleCategoryChange = (e) => {
-    onChange(e);
-    setCategory(e.target.value);
+    onChange(e.target.value);
   };
 
   return (
@@ -16,38 +13,14 @@ const CategorySelect = ({ onChange }) => {
         </div>
         <div>
           <Dropdown
-            options={[
-              { label: "Food", value: "6231da8ecece324534b292da" },
-              {
-                label: "Swallow",
-
-                value: "6231da8ecece324534b292db",
-              },
-              {
-                label: "Snacks",
-
-                value: "6231da8ecece324534b292dc",
-              },
-              {
-                label: "Dessert",
-
-                value: "6231da8ecece324534b292dd",
-              },
-              {
-                label: "Drinks",
-
-                value: "6231da8ecece324534b292de",
-              },
-            ]}
+            options={categories}
             value={category}
             onChange={handleCategoryChange}
           />
         </div>
       </div>
 
-      <p className="dropdown-text">
-        You have selected this category!
-      </p>
+      <p className="dropdown-text">You have selected this category!</p>
     </>
   );
 };
@@ -58,11 +31,13 @@ const Dropdown = ({ label, value, options, onChange }) => {
       {label}
       <select value={value} onChange={onChange}>
         {options.map((option) => (
-          <option value={option.value}>{option.label}</option>
+          <option key={option.label} value={option.value}>
+            {option.label}
+          </option>
         ))}
       </select>
     </label>
   );
 };
 
-export default CategorySelect;
+export default React.memo(CategorySelect);

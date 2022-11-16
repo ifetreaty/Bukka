@@ -19,10 +19,10 @@ db.ROLES = ["user", "admin"];
 
 db.meal = require("./meal.model.js");
 
+db.cart = require("./cart.model.js");
+
 db.menuitem = require("./menu-item.model")(mongoose, mongoosePaginate);
 
-db.cart = require("./cart.model");
-
-db.CATEGORIES = ["food", "swallow", "snacks", "dessert", "drinks"];
+db.category = require("./category.model.js");
 
 module.exports = db;

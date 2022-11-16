@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import FoodTab from "../components/UserTabs/food-tab";
-import SwallowTab from "../components/AllTabs/swallow-tab";
-import SnackTab from "../components/AllTabs/snack-tab";
-import DessertTab from "../components/AllTabs/dessert-tab";
-import DrinkTab from "../components/AllTabs/drinks-tab";
+import SwallowTab from "../components/MenuTabs/swallow-tab";
+import SnackTab from "../components/MenuTabs/snack-tab";
+import DessertTab from "../components/MenuTabs/dessert-tab";
+import DrinkTab from "../components/MenuTabs/drinks-tab";
 import TabNavItem from "../components/tab-nav-item.component";
 import TabContent from "../components/tab-content.component";
 

@@ -13,6 +13,6 @@ module.exports = (mongoose, mongoosePaginate) => {
     },
   });
   schema.plugin(mongoosePaginate);
-  const MenuItem = mongoose.model("menuItem", schema);
+  const MenuItem = mongoose.model("MenuItem", schema);
   return MenuItem;
 };

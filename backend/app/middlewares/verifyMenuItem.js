@@ -21,15 +21,15 @@ checkDuplicateMealName = (req, res, next) => {
   });
 };
 
-checkCategoryExists = (req, res, next) => {
-  Category.findOne({
-    category: req.body.category,
-  }).exec((err) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
+checkCategoryExists = async (req, res, next) => {
+  const category = await Category.findOne({
+    _id: req.body.category,
   });
+  if (category == null) {
+    res.status(400).send({ message: "Category not found!" });
+    return;
+  }
+  console.log(category, "yo");
 
   next();
 };
