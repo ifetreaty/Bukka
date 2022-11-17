@@ -31,6 +31,7 @@ function App() {
         {/* public routes */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/admin/login" element={<BoardAdmin />} />
         <Route path="/register" element={<Register />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
 
@@ -66,14 +67,14 @@ function App() {
           }
         ></Route>
 
-        <Route
+        {/* <Route
           path="/admin/login"
           element={
             <RequireAuth allowedRoles={[ROLES.Admin]}>
               <BoardAdmin />
             </RequireAuth>
           }
-        ></Route>
+        ></Route> */}
 
         <Route
           path="/admin/meals"

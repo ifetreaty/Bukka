@@ -8,6 +8,11 @@ import "../App.css";
 const UserHomePage = () => {
   const { user } = useContext(UserContext);
   console.log(user);
+
+  const logout = (user) => {
+    localStorage.clear(user);
+    window.location.href = '/';
+}
   return (
     <>
       <nav className="nav-background">
@@ -19,11 +24,13 @@ const UserHomePage = () => {
           <NavLink to="/my-orders" className="nav-link-no-land">
             Cart
           </NavLink>
-          <NavLink to="#" className="nav-link-no-land">
+          <div>
+          <NavLink to="#" className="nav-link-no-land" onClick={(e) => logout(user, e)}>
             Log Out
           </NavLink>
+          </div>
 
-          <h3 className="user-name-text">Hello, {user.username}</h3>
+          <h3 className="user-name-text">Hello, {user?.username ? user.username : "stranger"}</h3>
         </div>
       </nav>
     </>

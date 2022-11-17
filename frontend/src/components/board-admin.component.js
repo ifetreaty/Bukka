@@ -40,7 +40,7 @@ const Login = () => {
     if (checkBtn.current?.context._errors.length === 0) {
       AuthService.loginAdmin(state.username, state.password).then(
         () => {
-          navigate("/admin-homepage");
+          navigate("/admin/meals");
           window.location.reload();
         },
         (error) => {

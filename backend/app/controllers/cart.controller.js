@@ -71,7 +71,7 @@ exports.addToCart = async (req, res) => {
       let data = await cart.save();
       res.status(200).json({
         type: "success",
-        mgs: "Process Successful",
+        msg: "Process Successful",
         data: data,
       });
     }
