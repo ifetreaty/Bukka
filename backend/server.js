@@ -194,3 +194,5 @@ app.use(
     origin: ["http://localhost:8081"],
   })
 );
+
+module.exports = app;
