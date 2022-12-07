@@ -11,7 +11,7 @@ const mongoose = require("mongoose");
 
 require("dotenv").config();
 
-const dbConfig = require("./app/config/db.config");
+const dbConfig = require("./config/db.config");
 const app = express();
 
 app.use(cors());
@@ -32,19 +32,19 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to Bukka." });
 });
 
-require("./app/routes/auth.routes")(app);
-require("./app/routes/user.routes")(app);
+require("./routes/auth.routes")(app);
+require("./routes/user.routes")(app);
 
 const PORT = process.env.PORT || 8085;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
 
-const db = require("./app/models");
-const Role = require("./app/models/role.model");
-const User = require("./app/models/user.model");
-const MenuItem = require("./app/models/menu-item.model");
-const Category = require("./app/models/category.model");
+const db = require("./models");
+const Role = require("./models/role.model");
+const User = require("./models/user.model");
+const MenuItem = require("./models/menu-item.model");
+const Category = require("./models/category.model");
 const bcrypt = require("bcryptjs");
 
 const createAdminUser = async () => {
@@ -136,13 +136,13 @@ db.mongoose
 
 app.use(express.static(__dirname + "/public"));
 
-app.use("/api", require("./app/routes/meal.routes"));
+app.use("/api", require("./routes/meal.routes"));
 
-app.use("/api", require("./app/routes/file-upload.routes"));
+app.use("/api", require("./routes/file-upload.routes"));
 
-app.use("/api", require("./app/routes/menu.routes"));
+app.use("/api", require("./routes/menu.routes"));
 
-app.use("/api", require("./app/routes/cart.routes"));
+app.use("/api", require("./routes/cart.routes"));
 
 app.use((error, req, res, next) => {
   let errorData = {
